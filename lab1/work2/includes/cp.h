@@ -1,11 +1,13 @@
 #include <windows.h>
 #include <string>
 
+//#define cpDEBUG
+
 void cpUI(std::string path, std::string target);
 
-void cp(std::string path, std::string target, unsigned long long bs, unsigned long long thNum);
+DWORD cp(std::string path, std::string target, unsigned long long bs, unsigned long long thNum);
 
-void readWrite(HANDLE in, HANDLE out, unsigned long long fileSize, unsigned long long bs, unsigned long long thNum);
+DWORD readWrite(HANDLE in, HANDLE out, unsigned long long fileSize, unsigned long long bs, unsigned long long thNum);
 
 inline HANDLE openSrc(std::string path);
 
@@ -22,3 +24,5 @@ void CALLBACK FileIOCompletionRoutineOUT(DWORD dwErrorCode, DWORD dwNumberOfByte
 unsigned long long getOverlappedNum(LPOVERLAPPED lpOverlapped);
 
 DWORD getDriveSectorSize();
+
+DWORD getDriveSectorSize(DWORD &sectorsPerCluster);
