@@ -31,7 +31,7 @@ int genRndFile(string path, size_t bytes)
     do
     {
         toWrite = leftSize >= buffer_n ? buffer_n : leftSize;
-        for(size_t i = 0; i < leftSize; ++i)
+        for(size_t i = 0; i < toWrite; ++i)
             buffer[i] = (unsigned char)(rand() % 256);
         fs.write(buffer, sizeof(char) * toWrite);
         leftSize -= toWrite;
