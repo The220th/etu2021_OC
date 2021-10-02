@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int genRndFile(string path, size_t bytes)
+/*int genRndFile(string path, size_t bytes)
 {
 	ofstream fs(path, ios::out | ios::binary | ios::app);
 	srand(time(NULL));
@@ -16,6 +16,28 @@ int genRndFile(string path, size_t bytes)
 		rndByte[0] = (unsigned char)(rand() % 256);
 		fs.write(rndByte, sizeof(rndByte));
 	}
+	fs.close();
+	return 0;
+}*/
+int genRndFile(string path, size_t bytes)
+{
+	ofstream fs(path, ios::out | ios::binary | /*ios::app*/ios::trunc);
+	srand(time(NULL));
+
+    const size_t buffer_n = 16*1024*1024; // 16M
+    char* buffer = new char[buffer_n];
+    size_t toWrite;
+    size_t leftSize = bytes;
+    do
+    {
+        toWrite = leftSize >= buffer_n ? buffer_n : leftSize;
+        for(size_t i = 0; i < leftSize; ++i)
+            buffer[i] = (unsigned char)(rand() % 256);
+        fs.write(buffer, sizeof(char) * toWrite);
+        leftSize -= toWrite;
+    }while(leftSize > 0);
+
+    delete buffer;
 	fs.close();
 	return 0;
 }

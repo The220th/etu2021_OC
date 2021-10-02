@@ -24,17 +24,20 @@ using namespace std;
     thNum_b: означает, что минимальное кол-во перекрывающихся операций ввода и вывода будет = thNum_b
     thNum_e: означает, что максимальное кол-во перекрывающихся операций ввода и вывода будет = thNum_e
 */
-const unsigned bs_b = 20;
-const unsigned bs_e = 70;
-
-const unsigned bs_std = 16;
-const unsigned thNum_b = 1;
-const unsigned thNum_e = 15;
 //===============
 
-
-
 void cpUI(string path, string target)
+{
+    const unsigned bs_b = 1;
+    const unsigned bs_e = 70;
+
+    const unsigned bs_std = 16;
+    const unsigned thNum_b = 1;
+    const unsigned thNum_e = 25;
+    cpUI(path, target, bs_b, bs_e, bs_std, thNum_b, thNum_e);
+}
+
+void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_std, unsigned thNum_b, unsigned thNum_e)
 {
     DWORD time;
     DWORD sectorsPerCluster;
@@ -56,7 +59,7 @@ void cpUI(string path, string target)
     {
         bs = sectorSize*i;
         time = cp(path, target, bs, 1);
-        cout << "bs = " << bs << " (" << i << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
+        cout << "bs = " << bs << " B (" << i << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
         bsX[i_bsXY] = i;
         bsY[i_bsXY] = time;
     }
@@ -65,8 +68,8 @@ void cpUI(string path, string target)
 
     //=====bs = bs_std, thNum = x, time = y=====
     const size_t n_thXY = thNum_e - thNum_b + 1;
-    unsigned thX[n_bsXY];
-    unsigned thY[n_bsXY];
+    unsigned thX[n_thXY];
+    unsigned thY[n_thXY];
     size_t i_thXY = 0; /*WTF? warning: variable 'i_bsXY' set but not used*/ i_thXY++;--i_thXY; //blblblblbl
 
     bs = bs_std*sectorSize;
@@ -74,7 +77,7 @@ void cpUI(string path, string target)
     {
         thNum = i;
         time = cp(path, target, bs, thNum);
-        cout << "bs = " << bs << " (" << bs_std << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
+        cout << "bs = " << bs << " B (" << bs_std << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
         thX[i_thXY] = thNum;
         thY[i_thXY] = time;
     }
@@ -209,7 +212,9 @@ DWORD readWrite(HANDLE in, HANDLE out, unsigned long long fileSize, unsigned lon
             }
             if(leftelse)
             {
+                #ifdef cpDEBUG
                 cout << "Last size is " << bsLeft << ", addr=" << callLeft << ", thNum = " << thNum << ". " << endl;
+                #endif
                 ULL2DWORDS(offset_i, &(overLeft->Offset), &(overLeft->OffsetHigh));
                 offset_i += bsLeft;
             }

@@ -5,6 +5,8 @@
 
 void cpUI(std::string path, std::string target);
 
+void cpUI(std::string path, std::string target, unsigned bs_b, unsigned bs_e, unsigned bs_std, unsigned thNum_b, unsigned thNum_e);
+
 DWORD cp(std::string path, std::string target, unsigned long long bs, unsigned long long thNum);
 
 DWORD readWrite(HANDLE in, HANDLE out, unsigned long long fileSize, unsigned long long bs, unsigned long long thNum);
