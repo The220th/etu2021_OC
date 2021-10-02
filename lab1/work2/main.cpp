@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     {
         const std::string src(argv[1]);
         const std::string dst(argv[3]);
-        const size_t bytes_n = atoi(argv[2]);
+        const size_t bytes_n = atoll(argv[2]);
         
         std::cout << "Generating file with random bytes (length=" << bytes_n << "): \"" << src << "\"... " << std::endl;
         genRndFile(src, bytes_n);

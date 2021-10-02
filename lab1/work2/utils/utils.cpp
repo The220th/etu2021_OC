@@ -9,9 +9,9 @@ int genRndFile(string path, size_t bytes)
 {
 	ofstream fs(path, ios::out | ios::binary | ios::app);
 	srand(time(NULL));
-	unsigned long bytesNum = bytes;
+	unsigned long long bytesNum = bytes;
 	char rndByte[1];
-	for(unsigned long i = 0; i < bytesNum; ++i)
+	for(unsigned long long i = 0; i < bytesNum; ++i)
 	{
 		rndByte[0] = (unsigned char)(rand() % 256);
 		fs.write(rndByte, sizeof(rndByte));
