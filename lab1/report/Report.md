@@ -567,22 +567,6 @@ Hash of the file "in" is "ec6e2ea51d9a75b4f7749693f461c786".
 Drive sector size: 512 bytes.
 Drive cluster size: 8 sectors (4096 bytes).
 
-bs = 35840 (70*512), thNum = 1, time = 372278. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-Code for MatLab:
-
-function res = showPlot()
-
-polX = [70];
-polY = [372278];
-
-plot(polX, polY, 'r');
-grid on;
-xlim([70 70]);
-
-[mini, nmin] = min(polY);
-x_min = polX(nmin)
-y_min = mini
-
 bs = 32768 (64*512), thNum = 1, time = 187108. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
 bs = 32768 (64*512), thNum = 2, time = 178759. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
 bs = 32768 (64*512), thNum = 3, time = 148175. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
