@@ -369,7 +369,7 @@ FULL_TIME getFileTimeUI(string path)
         if(getSuccess)
         {
             //=====TIME=====
-            res.creationTime = creationTime; res.lastAccessTime = lastWriteTime; res.lastWriteTime = lastAccessTime;
+            res.creationTime = creationTime; res.lastAccessTime = lastAccessTime; res.lastWriteTime = lastWriteTime;
             cout << endl;
             cout << "The file creation date: " << encodeDate(creationTime) << endl;
             cout << "The file write time: " << encodeDate(lastWriteTime) << endl;

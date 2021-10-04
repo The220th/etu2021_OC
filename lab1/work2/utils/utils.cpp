@@ -44,7 +44,7 @@ int genRndFile(string path, size_t bytes)
 
 std::string makeCodeForMatLab(unsigned *X, unsigned *Y, size_t n)
 {
-    string res = "Code for MatLab:\n\n";
+    string res = "\nCode for MatLab:\n\n";
 /* Example:
 function res = showPlot()
 

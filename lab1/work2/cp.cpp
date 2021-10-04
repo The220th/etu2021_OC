@@ -42,13 +42,16 @@ void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_
     DWORD time;
     DWORD sectorsPerCluster;
     DWORD sectorSize = getDriveSectorSize(sectorsPerCluster);
+    DWORD clusterSize = sectorSize*sectorsPerCluster;
     unsigned long long bs;
     unsigned long long thNum;
 
+    cout << endl;
     cout << "Drive sector size: " << sectorSize << " bytes. " << endl;
-    cout << "Drive cluster size: " << sectorsPerCluster << " sectors (" << sectorSize*sectorsPerCluster << " bytes). " << endl << endl;
+    cout << "Drive cluster size: " << sectorsPerCluster << " sectors (" << clusterSize << " bytes). " << endl;
 
     //=====thNum = 1, bs = x, time = y=====
+    cout << endl;
     const size_t n_bsXY = bs_e - bs_b + 1;
     unsigned bsX[n_bsXY];
     unsigned bsY[n_bsXY];
@@ -57,9 +60,9 @@ void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_
     thNum = 1;
     for(unsigned i = bs_b, i_bsXY = 0; i <= bs_e; ++i, ++i_bsXY)
     {
-        bs = sectorSize*i;
+        bs = clusterSize*i;
         time = cp(path, target, bs, 1);
-        cout << "bs = " << bs << " B (" << i << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
+        cout << "bs = " << bs << " B (" << i << "*" << clusterSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
         bsX[i_bsXY] = i;
         bsY[i_bsXY] = time;
     }
@@ -67,17 +70,18 @@ void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_
 
 
     //=====bs = bs_std, thNum = x, time = y=====
+    cout << endl;
     const size_t n_thXY = thNum_e - thNum_b + 1;
     unsigned thX[n_thXY];
     unsigned thY[n_thXY];
     size_t i_thXY = 0; /*WTF? warning: variable 'i_bsXY' set but not used*/ i_thXY++;--i_thXY; //blblblblbl
 
-    bs = bs_std*sectorSize;
+    bs = bs_std*clusterSize;
     for(unsigned i = thNum_b, i_thXY = 0; i <= thNum_e; ++i, ++i_thXY)
     {
         thNum = i;
         time = cp(path, target, bs, thNum);
-        cout << "bs = " << bs << " B (" << bs_std << "*" << sectorSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
+        cout << "bs = " << bs << " B (" << bs_std << "*" << clusterSize << "), thNum = " << thNum << ", time = " << time << ". Hash of result file = \"" << compute_md5(target) << "\". " << endl;
         thX[i_thXY] = thNum;
         thY[i_thXY] = time;
     }
