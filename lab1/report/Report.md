@@ -102,7 +102,9 @@
 # Копирование файла с помощью операций перекрывающегося ввода-вывода
 
 В ходе выполнения лабораторной работы была написана программа, которая асинхронно копирует файл. После её написания были проведены замеры времени копирования: 
+
 1. Когда постоянно кол-во перекрывающихся операций ввода-вывода (1 штука), но меняется размер копируемого блока
+
 1. Когда постоянен размер копируемого блока, но меняется кол-во перекрывающихся операций ввода-вывода.
 
 В замерах используются такие обозначения как "bs" и "thNum". Под "bs" подразумевается размер копируемого блока, а под "thNum" - количество перекрывающихся операций ввода-вывода.
@@ -111,19 +113,19 @@
 
 ## Замер времени с изменяющимся копируемым блоком данных
 
-Первый замер (см. Приложении А). Копировался файл размером 1.5 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 14.
+Первый замер (см. Приложение А). Копировался файл размером 2.79 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 14.
 
 ![замер 1 с изменяющимся копируемым блоком данных](./2_1_1.png)
 
 <center>Рисунок 14 - замер 1 с изменяющимся копируемым блоком данных</center>
 
-Второй замер (см. Приложении А). Копировался файл размером 1.5 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 15.
+Второй замер (см. Приложение А). Копировался файл размером 1.4 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 15.
 
 ![замер 2 с изменяющимся копируемым блоком данных](./2_1_2.png)
 
 <center>Рисунок 15 - замер 2 с изменяющимся копируемым блоком данных</center>
 
-Третий замер (см. Приложении А). Копировался файл размером 191 МБ. График зависимости времени от блока копируемых данных приведён на рисунке 16.
+Третий замер (см. Приложение А). Копировался файл размером 4.7 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 16.
 
 ![замер 3 с изменяющимся копируемым блоком данных](./2_1_3.png)
 
@@ -133,31 +135,31 @@
 
 ## Замер времени с изменяющимся количеством перекрывающихся операций ввода-вывода
 
-Первый замер (см. Приложении Б). Копировался файл размером 477 МБ. График зависимости времени от блока копируемых данных приведён на рисунке 17.
+Первый замер (см. Приложение Б). Копировался файл размером 2.79 ГБ. График зависимости времени от количества перекрывающихся операций ввода-вывода приведён на рисунке 17.
 
 ![замер 1 с изменяющимся количеством операций в-в](./2_2_1.png)
 
 <center>Рисунок 17 - замер 1 с изменяющимся количеством операций в-в</center>
 
-Второй замер (см. Приложении Б). Копировался файл размером 477 МБ. График зависимости времени от блока копируемых данных приведён на рисунке 18.
+Второй замер (см. Приложение Б). Копировался файл размером 1.4 ГБ. График зависимости времени от количества перекрывающихся операций ввода-вывода приведён на рисунке 18.
 
 ![замер 2 с изменяющимся количеством операций в-в](./2_2_2.png)
 
 <center>Рисунок 18 - замер 2 с изменяющимся количеством операций в-в</center>
 
-Третий замер (см. Приложении Б). Копировался файл размером 1.5 ГБ. График зависимости времени от блока копируемых данных приведён на рисунке 19.
+Третий замер (см. Приложение Б). Копировался файл размером 4.7 ГБ. График зависимости времени от количества перекрывающихся операций ввода-вывода приведён на рисунке 19.
 
 ![замер 3 с изменяющимся количеством операций в-в](./2_2_3.png)
 
 <center>Рисунок 19 - замер 3 с изменяющимся количеством операций в-в</center>
 
-Четвёртый замер (см. Приложении Б). Копировался файл размером 191 МБ. График зависимости времени от блока копируемых данных приведён на рисунке 20.
+Четвёртый замер (см. Приложение Б). Копировался файл размером 1.5 ГБ. График зависимости времени от количества перекрывающихся операций ввода-вывода приведён на рисунке 20.
 
 ![замер 4 с изменяющимся количеством операций в-в](./2_2_4.png)
 
 <center>Рисунок 20 - замер 4 с изменяющимся количеством операций в-в</center>
 
-Можно заметить, что в какой-то момент времени скорость уже будет слабо зависеть от количества перекрывающихся операций ввода-вывода. В зависимости от ПК оптимальное количество операций в-в будет разным. Например, для замера 3, можно сказать, что оптимальное количество около 8 операций. А если задать их слишком много при относительно небольшом размере файла, то копирование будет производиться только медленнее. Также необходимо учесть, что ПК во время замеров мог быть нагружен в неопределённый момент времени, и поэтому на графике можно заметить "горки".
+Можно заметить, что в какой-то момент времени скорость уже будет слабо зависеть от количества перекрывающихся операций ввода-вывода. В зависимости от ПК оптимальное количество операций в-в будет разным. Например, для замера 4, можно сказать, что оптимальное количество около 8 операций. А если задать их слишком много при относительно небольшом размере файла, то копирование будет производиться только медленнее. Можно лишь сказать, что несколько перекрывающихся операций в-в лучше, чем одна. Также необходимо учесть, что ПК во время замеров мог быть нагружен в неопределённый момент времени, и поэтому на графике можно заметить "горки".
 
 Исходный код программы доступен [здесь](https://github.com/The220th/etu2021_OC/tree/main/lab1/work2): https://github.com/The220th/etu2021_OC/tree/main/lab1/work2.
 
@@ -167,290 +169,307 @@
 
 # Приложение А
 
-Замер 1. Размер файла 1610612739 байт (1.5 ГБ):
+Замер 1. Размер файла 3000001057 байт (2.79 ГБ):
 
 ``` bash
-D:\git\lab1\work2>lab1.2.exe in 1610612739 out
-Generating file with random bytes (length=1610612739): "in"...
-bytes=1610612739 8
-Generating done.
-Hash of the file "in" is "d83f72f0245244a77feb2bd2f406ede7".
-Drive sector size: 512 bytes.
-Drive cluster size: 8 sectors (4096 bytes).
+C:\Users\wex\Downloads\etu2021_OC-main (4)\etu2021_OC-main\lab1\work2>lab1.2.exe in 3000001057 out
+Generating file with random bytes (length=3000001057): "in"... 
+Generating done. 
+Hash of the file "in" is "0f4d53e7058f7b3b72252596316ceeaf".  
 
-bs = 512 (1*512), thNum = 1, time = 689131. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 1024 (2*512), thNum = 1, time = 350322. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 1536 (3*512), thNum = 1, time = 238125. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 1, time = 167881. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2560 (5*512), thNum = 1, time = 141046. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 3072 (6*512), thNum = 1, time = 118004. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 3584 (7*512), thNum = 1, time = 103855. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 4096 (8*512), thNum = 1, time = 84770. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 4608 (9*512), thNum = 1, time = 83622. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 5120 (10*512), thNum = 1, time = 76631. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 5632 (11*512), thNum = 1, time = 71824. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 6144 (12*512), thNum = 1, time = 63915. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 6656 (13*512), thNum = 1, time = 64533. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 7168 (14*512), thNum = 1, time = 59664. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 7680 (15*512), thNum = 1, time = 58313. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 8192 (16*512), thNum = 1, time = 48461. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 8704 (17*512), thNum = 1, time = 52863. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 9216 (18*512), thNum = 1, time = 49524. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 9728 (19*512), thNum = 1, time = 59788. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 10240 (20*512), thNum = 1, time = 43781. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 10752 (21*512), thNum = 1, time = 44750. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 11264 (22*512), thNum = 1, time = 43448. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 11776 (23*512), thNum = 1, time = 42367. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 12288 (24*512), thNum = 1, time = 36826. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 12800 (25*512), thNum = 1, time = 40450. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 13312 (26*512), thNum = 1, time = 39011. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 13824 (27*512), thNum = 1, time = 39125. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 14336 (28*512), thNum = 1, time = 37311. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 14848 (29*512), thNum = 1, time = 38642. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 15360 (30*512), thNum = 1, time = 38477. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 15872 (31*512), thNum = 1, time = 38528. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 16384 (32*512), thNum = 1, time = 34050. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 16896 (33*512), thNum = 1, time = 38418. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 17408 (34*512), thNum = 1, time = 38709. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 17920 (35*512), thNum = 1, time = 36802. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 18432 (36*512), thNum = 1, time = 35466. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 18944 (37*512), thNum = 1, time = 37353. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 19456 (38*512), thNum = 1, time = 36439. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 19968 (39*512), thNum = 1, time = 35943. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 20480 (40*512), thNum = 1, time = 33098. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 20992 (41*512), thNum = 1, time = 36527. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 21504 (42*512), thNum = 1, time = 34892. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 22016 (43*512), thNum = 1, time = 35089. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 22528 (44*512), thNum = 1, time = 36379. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 23040 (45*512), thNum = 1, time = 34806. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 23552 (46*512), thNum = 1, time = 37073. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 24064 (47*512), thNum = 1, time = 34938. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 24576 (48*512), thNum = 1, time = 32231. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 25088 (49*512), thNum = 1, time = 35393. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 25600 (50*512), thNum = 1, time = 35774. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 26112 (51*512), thNum = 1, time = 34800. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 26624 (52*512), thNum = 1, time = 34842. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 27136 (53*512), thNum = 1, time = 34252. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 27648 (54*512), thNum = 1, time = 34607. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 28160 (55*512), thNum = 1, time = 34963. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 28672 (56*512), thNum = 1, time = 31877. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 29184 (57*512), thNum = 1, time = 34296. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 29696 (58*512), thNum = 1, time = 34126. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 30208 (59*512), thNum = 1, time = 34213. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 30720 (60*512), thNum = 1, time = 33917. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 31232 (61*512), thNum = 1, time = 33597. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 31744 (62*512), thNum = 1, time = 33666. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 32256 (63*512), thNum = 1, time = 34871. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 32768 (64*512), thNum = 1, time = 31114. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 33280 (65*512), thNum = 1, time = 33543. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 33792 (66*512), thNum = 1, time = 34363. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 34304 (67*512), thNum = 1, time = 34523. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 34816 (68*512), thNum = 1, time = 33371. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 35328 (69*512), thNum = 1, time = 34062. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 35840 (70*512), thNum = 1, time = 33824. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
+Drive sector size: 512 bytes. 
+Drive cluster size: 8 sectors (4096 bytes). 
+
+bs = 4096 B (1*4096), thNum = 1, time = 390271. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 8192 B (2*4096), thNum = 1, time = 234533. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 12288 B (3*4096), thNum = 1, time = 180635. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 16384 B (4*4096), thNum = 1, time = 133693. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 20480 B (5*4096), thNum = 1, time = 105494. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 24576 B (6*4096), thNum = 1, time = 108423. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 28672 B (7*4096), thNum = 1, time = 91783. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 32768 B (8*4096), thNum = 1, time = 88530. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 36864 B (9*4096), thNum = 1, time = 83980. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 40960 B (10*4096), thNum = 1, time = 77803. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 45056 B (11*4096), thNum = 1, time = 77304. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 49152 B (12*4096), thNum = 1, time = 69069. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 53248 B (13*4096), thNum = 1, time = 70516. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 57344 B (14*4096), thNum = 1, time = 68734. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 61440 B (15*4096), thNum = 1, time = 67237. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 65536 B (16*4096), thNum = 1, time = 62713. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 69632 B (17*4096), thNum = 1, time = 62989. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 73728 B (18*4096), thNum = 1, time = 61589. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 77824 B (19*4096), thNum = 1, time = 62612. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 81920 B (20*4096), thNum = 1, time = 57492. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 86016 B (21*4096), thNum = 1, time = 59606. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 90112 B (22*4096), thNum = 1, time = 58268. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 94208 B (23*4096), thNum = 1, time = 56673. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 98304 B (24*4096), thNum = 1, time = 52213. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 102400 B (25*4096), thNum = 1, time = 55021. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 106496 B (26*4096), thNum = 1, time = 53458. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 110592 B (27*4096), thNum = 1, time = 52721. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 114688 B (28*4096), thNum = 1, time = 53261. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 118784 B (29*4096), thNum = 1, time = 52103. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 122880 B (30*4096), thNum = 1, time = 49661. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 126976 B (31*4096), thNum = 1, time = 56350. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 131072 B (32*4096), thNum = 1, time = 50557. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 135168 B (33*4096), thNum = 1, time = 61866. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 139264 B (34*4096), thNum = 1, time = 60848. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 143360 B (35*4096), thNum = 1, time = 62017. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 147456 B (36*4096), thNum = 1, time = 59213. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 151552 B (37*4096), thNum = 1, time = 59141. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 155648 B (38*4096), thNum = 1, time = 57307. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 159744 B (39*4096), thNum = 1, time = 58685. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 163840 B (40*4096), thNum = 1, time = 55893. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 167936 B (41*4096), thNum = 1, time = 59092. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 172032 B (42*4096), thNum = 1, time = 59726. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 176128 B (43*4096), thNum = 1, time = 59250. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 180224 B (44*4096), thNum = 1, time = 59003. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 184320 B (45*4096), thNum = 1, time = 57818. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 188416 B (46*4096), thNum = 1, time = 58487. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 192512 B (47*4096), thNum = 1, time = 56942. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 196608 B (48*4096), thNum = 1, time = 58517. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 200704 B (49*4096), thNum = 1, time = 62742. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 204800 B (50*4096), thNum = 1, time = 58861. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 208896 B (51*4096), thNum = 1, time = 57209. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 212992 B (52*4096), thNum = 1, time = 56290. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 217088 B (53*4096), thNum = 1, time = 55291. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 221184 B (54*4096), thNum = 1, time = 55036. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 225280 B (55*4096), thNum = 1, time = 54324. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 229376 B (56*4096), thNum = 1, time = 52393. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 233472 B (57*4096), thNum = 1, time = 52551. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 237568 B (58*4096), thNum = 1, time = 51781. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 241664 B (59*4096), thNum = 1, time = 53337. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 245760 B (60*4096), thNum = 1, time = 52756. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 249856 B (61*4096), thNum = 1, time = 54415. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 253952 B (62*4096), thNum = 1, time = 53148. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 258048 B (63*4096), thNum = 1, time = 52410. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 262144 B (64*4096), thNum = 1, time = 53461. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 266240 B (65*4096), thNum = 1, time = 58999. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 270336 B (66*4096), thNum = 1, time = 57530. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 274432 B (67*4096), thNum = 1, time = 55471. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 278528 B (68*4096), thNum = 1, time = 55735. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 282624 B (69*4096), thNum = 1, time = 55819. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 286720 B (70*4096), thNum = 1, time = 55510. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".  
+bs = 1048576 B (256*4096), thNum = 1, time = 40358. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 2097152 B (512*4096), thNum = 1, time = 50669. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 4194304 B (1024*4096), thNum = 1, time = 50699. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 8388608 B (2048*4096), thNum = 1, time = 43191. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 16777216 B (4096*4096), thNum = 1, time = 37510. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 33554432 B (8192*4096), thNum = 1, time = 34382. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+
 Code for MatLab:
 
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70];
-polY = [689131, 350322, 238125, 167881, 141046, 118004, 103855, 84770, 83622, 76631, 71824, 63915, 64533, 59664, 58313, 48461, 52863, 49524, 59788, 43781, 44750, 43448, 42367, 36826, 40450, 39011, 39125, 37311, 38642, 38477, 38528, 34050, 38418, 38709, 36802, 35466, 37353, 36439, 35943, 33098, 36527, 34892, 35089, 36379, 34806, 37073, 34938, 32231, 35393, 35774, 34800, 34842, 34252, 34607, 34963, 31877, 34296, 34126, 34213, 33917, 33597, 33666, 34871, 31114, 33543, 34363, 34523, 33371, 34062, 33824];
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 256, 512, 1024, 2048, 4096, 8192];
+polY = [390271, 234533, 180635, 133693, 105494, 108423, 91783, 88530, 83980, 77803, 77304, 69069, 70516, 68734, 67237, 62713, 62989, 61589, 62612, 57492, 59606, 58268, 56673, 52213, 55021, 53458, 52721, 53261, 52103, 49661, 56350, 50557, 61866, 60848, 62017, 59213, 59141, 57307, 58685, 55893, 59092, 59726, 59250, 59003, 57818, 58487, 56942, 58517, 62742, 58861, 57209, 56290, 55291, 55036, 54324, 52393, 52551, 51781, 53337, 52756, 54415, 53148, 52410, 53461, 58999, 57530, 55471, 55735, 55819, 55510, 40358, 50669, 50699, 43191, 37510, 34382];
 
 plot(polX, polY, 'r');
 grid on;
-xlim([1 70]);
+xlim([1 8192]);
 
 [mini, nmin] = min(polY);
 x_min = polX(nmin)
 y_min = mini
 ```
 
-Замер 2. Размер файла 500000007 байт (477 МБ):
+Замер 2. Размер файла 1500001757 байт (1.4 ГБ):
 
 ``` bash
-D:\git\etu2021_OC-main\lab1\work2>lab1.2.exe in 500000007 out
-Generating file with random bytes (length=500000007): "in"...
+E:\work2>lab1.2.exe in 1500001757 out
+Generating file with random bytes (length=1500001757): "in"...
 Generating done.
-Hash of the file "in" is "8ad3c224670b521ebe04e5243b1a27dd".
+Hash of the file "in" is "a18b0031b0b8d8db5fc7c1db4c762cdc".
+
 Drive sector size: 512 bytes.
 Drive cluster size: 8 sectors (4096 bytes).
 
-bs = 512 B (1*512), thNum = 1, time = 205657. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 1024 B (2*512), thNum = 1, time = 102225. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 1536 B (3*512), thNum = 1, time = 72606. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 2048 B (4*512), thNum = 1, time = 51296. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 2560 B (5*512), thNum = 1, time = 43784. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 3072 B (6*512), thNum = 1, time = 35982. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 3584 B (7*512), thNum = 1, time = 32094. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 4096 B (8*512), thNum = 1, time = 25963. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 4608 B (9*512), thNum = 1, time = 25650. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 5120 B (10*512), thNum = 1, time = 22988. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 5632 B (11*512), thNum = 1, time = 21977. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 6144 B (12*512), thNum = 1, time = 19119. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 6656 B (13*512), thNum = 1, time = 19162. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 7168 B (14*512), thNum = 1, time = 18076. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 7680 B (15*512), thNum = 1, time = 17210. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 1, time = 14408. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8704 B (17*512), thNum = 1, time = 15865. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 9216 B (18*512), thNum = 1, time = 16502. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 9728 B (19*512), thNum = 1, time = 14285. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 10240 B (20*512), thNum = 1, time = 12935. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 10752 B (21*512), thNum = 1, time = 15117. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 11264 B (22*512), thNum = 1, time = 12344. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 11776 B (23*512), thNum = 1, time = 12235. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 12288 B (24*512), thNum = 1, time = 10553. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 12800 B (25*512), thNum = 1, time = 11593. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 13312 B (26*512), thNum = 1, time = 11980. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 13824 B (27*512), thNum = 1, time = 12858. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 14336 B (28*512), thNum = 1, time = 11274. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 14848 B (29*512), thNum = 1, time = 11391. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 15360 B (30*512), thNum = 1, time = 10886. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 15872 B (31*512), thNum = 1, time = 11099. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 16384 B (32*512), thNum = 1, time = 9776. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 16896 B (33*512), thNum = 1, time = 10961. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 17408 B (34*512), thNum = 1, time = 10444. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 17920 B (35*512), thNum = 1, time = 10765. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 18432 B (36*512), thNum = 1, time = 10198. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 18944 B (37*512), thNum = 1, time = 10653. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 19456 B (38*512), thNum = 1, time = 10508. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 19968 B (39*512), thNum = 1, time = 10938. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 20480 B (40*512), thNum = 1, time = 9374. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 20992 B (41*512), thNum = 1, time = 10586. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 21504 B (42*512), thNum = 1, time = 9932. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 22016 B (43*512), thNum = 1, time = 10344. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 22528 B (44*512), thNum = 1, time = 9857. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 23040 B (45*512), thNum = 1, time = 10235. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 23552 B (46*512), thNum = 1, time = 9741. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 24064 B (47*512), thNum = 1, time = 10244. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 24576 B (48*512), thNum = 1, time = 9179. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 25088 B (49*512), thNum = 1, time = 10215. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 25600 B (50*512), thNum = 1, time = 9796. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 26112 B (51*512), thNum = 1, time = 10542. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 26624 B (52*512), thNum = 1, time = 9633. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 27136 B (53*512), thNum = 1, time = 10039. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 27648 B (54*512), thNum = 1, time = 9731. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 28160 B (55*512), thNum = 1, time = 9997. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 28672 B (56*512), thNum = 1, time = 8894. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 29184 B (57*512), thNum = 1, time = 10018. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 29696 B (58*512), thNum = 1, time = 9500. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 30208 B (59*512), thNum = 1, time = 9783. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 30720 B (60*512), thNum = 1, time = 9834. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 31232 B (61*512), thNum = 1, time = 9987. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 31744 B (62*512), thNum = 1, time = 9635. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 32256 B (63*512), thNum = 1, time = 10018. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 32768 B (64*512), thNum = 1, time = 8963. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 33280 B (65*512), thNum = 1, time = 11900. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 33792 B (66*512), thNum = 1, time = 9623. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 34304 B (67*512), thNum = 1, time = 9624. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 34816 B (68*512), thNum = 1, time = 9813. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 35328 B (69*512), thNum = 1, time = 10008. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 35840 B (70*512), thNum = 1, time = 9778. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
+bs = 4096 B (1*4096), thNum = 1, time = 56691. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 8192 B (2*4096), thNum = 1, time = 31207. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 12288 B (3*4096), thNum = 1, time = 22769. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 16384 B (4*4096), thNum = 1, time = 18733. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 20480 B (5*4096), thNum = 1, time = 16580. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 24576 B (6*4096), thNum = 1, time = 14755. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 28672 B (7*4096), thNum = 1, time = 13576. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 32768 B (8*4096), thNum = 1, time = 12644. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 36864 B (9*4096), thNum = 1, time = 12249. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 40960 B (10*4096), thNum = 1, time = 11758. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 45056 B (11*4096), thNum = 1, time = 12023. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 49152 B (12*4096), thNum = 1, time = 11086. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 53248 B (13*4096), thNum = 1, time = 10688. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 57344 B (14*4096), thNum = 1, time = 10179. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 61440 B (15*4096), thNum = 1, time = 10421. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 1, time = 9922. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 69632 B (17*4096), thNum = 1, time = 13206. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 73728 B (18*4096), thNum = 1, time = 10613. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 77824 B (19*4096), thNum = 1, time = 9996. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 81920 B (20*4096), thNum = 1, time = 9490. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 86016 B (21*4096), thNum = 1, time = 10164. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 90112 B (22*4096), thNum = 1, time = 10107. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 94208 B (23*4096), thNum = 1, time = 9128. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 98304 B (24*4096), thNum = 1, time = 10182. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 102400 B (25*4096), thNum = 1, time = 9706. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 106496 B (26*4096), thNum = 1, time = 10268. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 110592 B (27*4096), thNum = 1, time = 9887. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 114688 B (28*4096), thNum = 1, time = 10302. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 118784 B (29*4096), thNum = 1, time = 9876. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 122880 B (30*4096), thNum = 1, time = 10031. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 126976 B (31*4096), thNum = 1, time = 9882. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 131072 B (32*4096), thNum = 1, time = 9791. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 135168 B (33*4096), thNum = 1, time = 9553. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 139264 B (34*4096), thNum = 1, time = 9799. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 143360 B (35*4096), thNum = 1, time = 9574. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 147456 B (36*4096), thNum = 1, time = 9964. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 151552 B (37*4096), thNum = 1, time = 9652. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 155648 B (38*4096), thNum = 1, time = 8882. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 159744 B (39*4096), thNum = 1, time = 9774. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 163840 B (40*4096), thNum = 1, time = 9066. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 167936 B (41*4096), thNum = 1, time = 8703. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 172032 B (42*4096), thNum = 1, time = 9690. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 176128 B (43*4096), thNum = 1, time = 9296. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 180224 B (44*4096), thNum = 1, time = 8593. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 184320 B (45*4096), thNum = 1, time = 9882. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 188416 B (46*4096), thNum = 1, time = 9265. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 192512 B (47*4096), thNum = 1, time = 8726. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 196608 B (48*4096), thNum = 1, time = 9542. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 200704 B (49*4096), thNum = 1, time = 9323. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 204800 B (50*4096), thNum = 1, time = 8561. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 208896 B (51*4096), thNum = 1, time = 9699. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 212992 B (52*4096), thNum = 1, time = 9170. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 217088 B (53*4096), thNum = 1, time = 8875. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 221184 B (54*4096), thNum = 1, time = 8519. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 225280 B (55*4096), thNum = 1, time = 9685. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 229376 B (56*4096), thNum = 1, time = 9016. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 233472 B (57*4096), thNum = 1, time = 8847. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 237568 B (58*4096), thNum = 1, time = 8329. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 241664 B (59*4096), thNum = 1, time = 9488. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 245760 B (60*4096), thNum = 1, time = 9404. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 249856 B (61*4096), thNum = 1, time = 8334. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 253952 B (62*4096), thNum = 1, time = 9291. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 258048 B (63*4096), thNum = 1, time = 9637. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 262144 B (64*4096), thNum = 1, time = 8170. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 266240 B (65*4096), thNum = 1, time = 9123. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 270336 B (66*4096), thNum = 1, time = 9365. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 274432 B (67*4096), thNum = 1, time = 8051. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 278528 B (68*4096), thNum = 1, time = 9253. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 282624 B (69*4096), thNum = 1, time = 9436. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 286720 B (70*4096), thNum = 1, time = 8603. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 1048576 B (256*4096), thNum = 1, time = 8606. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 2097152 B (512*4096), thNum = 1, time = 7793. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 4194304 B (1024*4096), thNum = 1, time = 9567. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 8388608 B (2048*4096), thNum = 1, time = 8582. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 16777216 B (4096*4096), thNum = 1, time = 7675. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 33554432 B (8192*4096), thNum = 1, time = 7770. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+
 Code for MatLab:
 
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70];
-polY = [205657, 102225, 72606, 51296, 43784, 35982, 32094, 25963, 25650, 22988, 21977, 19119, 19162, 18076, 17210, 14408, 15865, 16502, 14285, 12935, 15117, 12344, 12235, 10553, 11593, 11980, 12858, 11274, 11391, 10886, 11099, 9776, 10961, 10444, 10765, 10198, 10653, 10508, 10938, 9374, 10586, 9932, 10344, 9857, 10235, 9741, 10244, 9179, 10215, 9796, 10542, 9633, 10039, 9731, 9997, 8894, 10018, 9500, 9783, 9834, 9987, 9635, 10018, 8963, 11900, 9623, 9624, 9813, 10008, 9778];
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 256, 512, 1024, 2048, 4096, 8192];
+polY = [56691, 31207, 22769, 18733, 16580, 14755, 13576, 12644, 12249, 11758, 12023, 11086, 10688, 10179, 10421, 9922, 13206, 10613, 9996, 9490, 10164, 10107, 9128, 10182, 9706, 10268, 9887, 10302, 9876, 10031, 9882, 9791, 9553, 9799, 9574, 9964, 9652, 8882, 9774, 9066, 8703, 9690, 9296, 8593, 9882, 9265, 8726, 9542, 9323, 8561, 9699, 9170, 8875, 8519, 9685, 9016, 8847, 8329, 9488, 9404, 8334, 9291, 9637, 8170, 9123, 9365, 8051, 9253, 9436, 8603, 8606, 7793, 9567, 8582, 7675, 7770];
 
 plot(polX, polY, 'r');
 grid on;
-xlim([1 70]);
+xlim([1 8192]);
 
 [mini, nmin] = min(polY);
 x_min = polX(nmin)
 y_min = mini
 ```
 
-Замер 3. Размер файла 200010003 байт (191 МБ):
+Замер 3. Размер файла 5000001057 байт (4.7 ГБ):
 
 ``` bash
-C:\Users\User\Desktop\etu2021_OC-main\lab1\work2>lab1.2.exe in 200010003 out
-Generating file with random bytes (length=200010003): "in"...
-Generating done.
-Hash of the file "in" is "7ec4c448a14d2cd03f3df6d112084318".
-Drive sector size: 512 bytes.
-Drive cluster size: 8 sectors (4096 bytes).
+Generating file with random bytes (length=5000001057): "in"... 
+Generating done. 
+Hash of the file "in" is "81fb110ba36250ee7ceb2fc00b58d3d4". 
 
-bs = 512 B (1*512), thNum = 1, time = 111714. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 1024 B (2*512), thNum = 1, time = 58678. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 1536 B (3*512), thNum = 1, time = 40325. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 2048 B (4*512), thNum = 1, time = 31636. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 2560 B (5*512), thNum = 1, time = 25392. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 3072 B (6*512), thNum = 1, time = 21251. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 3584 B (7*512), thNum = 1, time = 18980. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 4096 B (8*512), thNum = 1, time = 13339. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 4608 B (9*512), thNum = 1, time = 15890. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 5120 B (10*512), thNum = 1, time = 14309. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 5632 B (11*512), thNum = 1, time = 13625. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 6144 B (12*512), thNum = 1, time = 12358. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 6656 B (13*512), thNum = 1, time = 12469. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 7168 B (14*512), thNum = 1, time = 11251. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 7680 B (15*512), thNum = 1, time = 11115. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 1, time = 8317. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8704 B (17*512), thNum = 1, time = 10694. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 9216 B (18*512), thNum = 1, time = 9688. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 9728 B (19*512), thNum = 1, time = 9786. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 10240 B (20*512), thNum = 1, time = 9135. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 10752 B (21*512), thNum = 1, time = 9115. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 11264 B (22*512), thNum = 1, time = 8288. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 11776 B (23*512), thNum = 1, time = 8430. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 12288 B (24*512), thNum = 1, time = 6834. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 12800 B (25*512), thNum = 1, time = 7788. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 13312 B (26*512), thNum = 1, time = 7842. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 13824 B (27*512), thNum = 1, time = 7851. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 14336 B (28*512), thNum = 1, time = 7772. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 14848 B (29*512), thNum = 1, time = 7311. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 15360 B (30*512), thNum = 1, time = 7330. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 15872 B (31*512), thNum = 1, time = 7396. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 16384 B (32*512), thNum = 1, time = 6371. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 16896 B (33*512), thNum = 1, time = 7447. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 17408 B (34*512), thNum = 1, time = 6790. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 17920 B (35*512), thNum = 1, time = 7197. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 18432 B (36*512), thNum = 1, time = 6892. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 18944 B (37*512), thNum = 1, time = 6950. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 19456 B (38*512), thNum = 1, time = 6874. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 19968 B (39*512), thNum = 1, time = 6603. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 20480 B (40*512), thNum = 1, time = 6095. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 20992 B (41*512), thNum = 1, time = 6570. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 21504 B (42*512), thNum = 1, time = 6686. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 22016 B (43*512), thNum = 1, time = 6449. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 22528 B (44*512), thNum = 1, time = 6283. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 23040 B (45*512), thNum = 1, time = 6166. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 23552 B (46*512), thNum = 1, time = 6151. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 24064 B (47*512), thNum = 1, time = 6392. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 24576 B (48*512), thNum = 1, time = 5609. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 25088 B (49*512), thNum = 1, time = 6290. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 25600 B (50*512), thNum = 1, time = 7307. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 26112 B (51*512), thNum = 1, time = 6800. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 26624 B (52*512), thNum = 1, time = 5881. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 27136 B (53*512), thNum = 1, time = 5899. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 27648 B (54*512), thNum = 1, time = 6329. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 28160 B (55*512), thNum = 1, time = 6255. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 28672 B (56*512), thNum = 1, time = 5829. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 29184 B (57*512), thNum = 1, time = 6087. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 29696 B (58*512), thNum = 1, time = 6267. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 30208 B (59*512), thNum = 1, time = 5897. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 30720 B (60*512), thNum = 1, time = 5823. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 31232 B (61*512), thNum = 1, time = 6245. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 31744 B (62*512), thNum = 1, time = 5962. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 32256 B (63*512), thNum = 1, time = 5986. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 32768 B (64*512), thNum = 1, time = 5827. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 33280 B (65*512), thNum = 1, time = 5663. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 33792 B (66*512), thNum = 1, time = 5676. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 34304 B (67*512), thNum = 1, time = 5718. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 34816 B (68*512), thNum = 1, time = 6070. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 35328 B (69*512), thNum = 1, time = 5412. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 35840 B (70*512), thNum = 1, time = 5847. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 262144 B (512*512), thNum = 1, time = 4674. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 524288 B (1024*512), thNum = 1, time = 4088. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 1048576 B (2048*512), thNum = 1, time = 4586. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 2097152 B (4096*512), thNum = 1, time = 3752. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 4194304 B (8192*512), thNum = 1, time = 4650. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
+Drive sector size: 512 bytes. 
+Drive cluster size: 8 sectors (4096 bytes). 
+
+bs = 4096 B (1*4096), thNum = 1, time = 575080. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 8192 B (2*4096), thNum = 1, time = 333328. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 12288 B (3*4096), thNum = 1, time = 269356. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 16384 B (4*4096), thNum = 1, time = 221675. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 20480 B (5*4096), thNum = 1, time = 168988. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 24576 B (6*4096), thNum = 1, time = 148138. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 28672 B (7*4096), thNum = 1, time = 135573. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 32768 B (8*4096), thNum = 1, time = 141000. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 36864 B (9*4096), thNum = 1, time = 129095. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 40960 B (10*4096), thNum = 1, time = 124494. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 45056 B (11*4096), thNum = 1, time = 110783. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 49152 B (12*4096), thNum = 1, time = 110088. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 53248 B (13*4096), thNum = 1, time = 102825. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 57344 B (14*4096), thNum = 1, time = 104403. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 61440 B (15*4096), thNum = 1, time = 97401. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 1, time = 100457. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 69632 B (17*4096), thNum = 1, time = 94423. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 73728 B (18*4096), thNum = 1, time = 92701. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 77824 B (19*4096), thNum = 1, time = 91499. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 81920 B (20*4096), thNum = 1, time = 91333. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 86016 B (21*4096), thNum = 1, time = 91788. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 90112 B (22*4096), thNum = 1, time = 86147. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 94208 B (23*4096), thNum = 1, time = 86851. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 98304 B (24*4096), thNum = 1, time = 82468. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 102400 B (25*4096), thNum = 1, time = 82658. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 106496 B (26*4096), thNum = 1, time = 83374. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 110592 B (27*4096), thNum = 1, time = 80125. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 114688 B (28*4096), thNum = 1, time = 81320. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 118784 B (29*4096), thNum = 1, time = 79306. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 122880 B (30*4096), thNum = 1, time = 80727. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 126976 B (31*4096), thNum = 1, time = 85983. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 131072 B (32*4096), thNum = 1, time = 82281. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 135168 B (33*4096), thNum = 1, time = 93207. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 139264 B (34*4096), thNum = 1, time = 93372. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 143360 B (35*4096), thNum = 1, time = 91235. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 147456 B (36*4096), thNum = 1, time = 90057. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 151552 B (37*4096), thNum = 1, time = 89319. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 155648 B (38*4096), thNum = 1, time = 89114. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 159744 B (39*4096), thNum = 1, time = 89397. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 163840 B (40*4096), thNum = 1, time = 89857. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 167936 B (41*4096), thNum = 1, time = 91614. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 172032 B (42*4096), thNum = 1, time = 93633. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 176128 B (43*4096), thNum = 1, time = 93441. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 180224 B (44*4096), thNum = 1, time = 92122. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 184320 B (45*4096), thNum = 1, time = 91867. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 188416 B (46*4096), thNum = 1, time = 90643. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 192512 B (47*4096), thNum = 1, time = 89085. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 196608 B (48*4096), thNum = 1, time = 88248. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 200704 B (49*4096), thNum = 1, time = 87102. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 204800 B (50*4096), thNum = 1, time = 86715. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 208896 B (51*4096), thNum = 1, time = 85632. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 212992 B (52*4096), thNum = 1, time = 84731. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 217088 B (53*4096), thNum = 1, time = 84679. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 221184 B (54*4096), thNum = 1, time = 84560. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 225280 B (55*4096), thNum = 1, time = 82314. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 229376 B (56*4096), thNum = 1, time = 79761. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 233472 B (57*4096), thNum = 1, time = 78483. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 237568 B (58*4096), thNum = 1, time = 78006. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 241664 B (59*4096), thNum = 1, time = 77880. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 245760 B (60*4096), thNum = 1, time = 77361. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 249856 B (61*4096), thNum = 1, time = 77352. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 253952 B (62*4096), thNum = 1, time = 76980. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 258048 B (63*4096), thNum = 1, time = 76332. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 262144 B (64*4096), thNum = 1, time = 76598. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 266240 B (65*4096), thNum = 1, time = 79981. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 270336 B (66*4096), thNum = 1, time = 80253. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 274432 B (67*4096), thNum = 1, time = 81308. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 278528 B (68*4096), thNum = 1, time = 82694. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 282624 B (69*4096), thNum = 1, time = 84275. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 286720 B (70*4096), thNum = 1, time = 83604. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 1048576 B (256*4096), thNum = 1, time = 65297. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 2097152 B (512*4096), thNum = 1, time = 75922. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4".
+bs = 4194304 B (1024*4096), thNum = 1, time = 80225. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 8388608 B (2048*4096), thNum = 1, time = 66066. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 16777216 B (4096*4096), thNum = 1, time = 59005. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 33554432 B (8192*4096), thNum = 1, time = 54741. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+
 Code for MatLab:
 
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 512, 1024, 2048, 4096, 8192];
-polY = [111714, 58678, 40325, 31636, 25392, 21251, 18980, 13339, 15890, 14309, 13625, 12358, 12469, 11251, 11115, 8317, 10694, 9688, 9786, 9135, 9115, 8288, 8430, 6834, 7788, 7842, 7851, 7772, 7311, 7330, 7396, 6371, 7447, 6790, 7197, 6892, 6950, 6874, 6603, 6095, 6570, 6686, 6449, 6283, 6166, 6151, 6392, 5609, 6290, 7307, 6800, 5881, 5899, 6329, 6255, 5829, 6087, 6267, 5897, 5823, 6245, 5962, 5986, 5827, 5663, 5676, 5718, 6070, 5412, 5847, 4674, 4088, 4586, 3752, 4650];
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 256, 512, 1024, 2048, 4096, 8192];
+polY = [575080, 333328, 269356, 221675, 168988, 148138, 135573, 141000, 129095, 124494, 110783, 110088, 102825, 104403, 97401, 100457, 94423, 92701, 91499, 91333, 91788, 86147, 86851, 82468, 82658, 83374, 80125, 81320, 79306, 80727, 85983, 82281, 93207, 93372, 91235, 90057, 89319, 89114, 89397, 89857, 91614, 93633, 93441, 92122, 91867, 90643, 89085, 88248, 87102, 86715, 85632, 84731, 84679, 84560, 82314, 79761, 78483, 78006, 77880, 77361, 77352, 76980, 76332, 76598, 79981, 80253, 81308, 82694, 84275, 83604, 65297, 75922, 80225, 66066, 59005, 54741];
 
 plot(polX, polY, 'r');
 grid on;
@@ -463,102 +482,183 @@ y_min = mini
 
 # Приложение Б
 
-Замер 1. Размер файла 500000007 байт (477 МБ):
+Замер 1. Размер файла 3000001057 байт (2.79 ГБ):
 
 ``` bash
-bs = 2048 (4*512), thNum = 1, time = 177381. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 2, time = 155503. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 3, time = 150902. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 4, time = 144694. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 5, time = 144585. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 6, time = 142797. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 7, time = 144935. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 8, time = 141149. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 9, time = 142350. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 10, time = 139177. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 11, time = 141569. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 12, time = 137285. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 13, time = 140620. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 14, time = 137183. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 15, time = 141514. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 16, time = 136642. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 17, time = 140843. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 18, time = 136694. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 19, time = 140464. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 20, time = 135893. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 21, time = 139204. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 22, time = 136669. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 23, time = 139640. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 24, time = 135572. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
-bs = 2048 (4*512), thNum = 25, time = 141525. Hash of result file = "d83f72f0245244a77feb2bd2f406ede7".
+C:\Users\wex\Downloads\etu2021_OC-main (4)\etu2021_OC-main\lab1\work2>lab1.2.exe in 3000001057 out
+Generating file with random bytes (length=3000001057): "in"... 
+Generating done. 
+Hash of the file "in" is "0f4d53e7058f7b3b72252596316ceeaf".  
+
+Drive sector size: 512 bytes. 
+Drive cluster size: 8 sectors (4096 bytes). 
+
+bs = 65536 B (16*4096), thNum = 1, time = 61977. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 2, time = 69956. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 3, time = 68818. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 4, time = 68537. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 5, time = 58837. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 6, time = 66037. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 7, time = 61737. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 8, time = 63555. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 9, time = 60852. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 10, time = 54894. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 11, time = 55541. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 12, time = 56137. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 13, time = 56245. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 14, time = 56086. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 15, time = 56406. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 16, time = 58820. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 17, time = 78052. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 18, time = 81328. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 19, time = 72573. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 20, time = 72899. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 21, time = 73502. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 22, time = 73988. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 23, time = 75297. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 24, time = 74884. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 25, time = 74203. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 256, time = 44804. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 512, time = 43688. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 1024, time = 42509. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 2048, time = 42389. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 4096, time = 37887. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+bs = 65536 B (16*4096), thNum = 8192, time = 42391. Hash of result file = "0f4d53e7058f7b3b72252596316ceeaf".
+
 Code for MatLab:
 
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-polY = [177381, 155503, 150902, 144694, 144585, 142797, 144935, 141149, 142350, 139177, 141569, 137285, 140620, 137183, 141514, 136642, 140843, 136694, 140464, 135893, 139204, 136669, 139640, 135572, 141525];
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 256, 512, 1024, 2048, 4096, 8192];
+polY = [61977, 69956, 68818, 68537, 58837, 66037, 61737, 63555, 60852, 54894, 55541, 56137, 56245, 56086, 56406, 58820, 78052, 81328, 72573, 72899, 73502, 73988, 75297, 74884, 74203, 44804, 43688, 42509, 42389, 37887, 42391];
 
 plot(polX, polY, 'r');
 grid on;
-xlim([1 25]);
+xlim([1 8192]);
 
 [mini, nmin] = min(polY);
 x_min = polX(nmin)
 y_min = mini
 ```
 
-Замер 2. Размер файла 500000007 байт (477 МБ):
+Замер 2. Размер файла 1500001757 байт (1.4 ГБ):
 
 ``` bash
-D:\git\etu2021_OC-main\lab1\work2>lab1.2.exe in 500000007 out
-Generating file with random bytes (length=500000007): "in"...
+E:\work2>lab1.2.exe in 1500001757 out
+Generating file with random bytes (length=1500001757): "in"...
 Generating done.
-Hash of the file "in" is "8ad3c224670b521ebe04e5243b1a27dd".
+Hash of the file "in" is "a18b0031b0b8d8db5fc7c1db4c762cdc".
+
 Drive sector size: 512 bytes.
 Drive cluster size: 8 sectors (4096 bytes).
 
-bs = 8192 B (16*512), thNum = 1, time = 14599. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 2, time = 13474. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 3, time = 12999. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 4, time = 12808. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 5, time = 12775. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 6, time = 12770. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 7, time = 12543. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 8, time = 12880. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 9, time = 12425. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 10, time = 12572. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 11, time = 12213. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 12, time = 12710. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 13, time = 12851. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 14, time = 12389. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 15, time = 13128. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 16, time = 13019. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 17, time = 12290. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 18, time = 13729. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 19, time = 12343. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 20, time = 12620. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 21, time = 12316. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 22, time = 12322. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 23, time = 12197. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 24, time = 12628. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
-bs = 8192 B (16*512), thNum = 25, time = 12913. Hash of result file = "8ad3c224670b521ebe04e5243b1a27dd".
+bs = 65536 B (16*4096), thNum = 1, time = 10863. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 2, time = 9575. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 3, time = 10152. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 4, time = 9607. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 5, time = 9696. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 6, time = 9995. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 7, time = 9748. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 8, time = 9436. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 9, time = 9972. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 10, time = 9487. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 11, time = 9587. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 12, time = 9522. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 13, time = 8688. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 14, time = 9456. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 15, time = 9311. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 16, time = 8893. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 17, time = 9922. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 18, time = 9676. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 19, time = 9670. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 20, time = 9359. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 21, time = 10199. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 22, time = 9051. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 23, time = 9836. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 24, time = 9462. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 25, time = 10223. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 256, time = 9083. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 512, time = 9994. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 1024, time = 9180. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 2048, time = 9082. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 4096, time = 8915. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+bs = 65536 B (16*4096), thNum = 8192, time = 9275. Hash of result file = "a18b0031b0b8d8db5fc7c1db4c762cdc".
+
 Code for MatLab:
 
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-polY = [14599, 13474, 12999, 12808, 12775, 12770, 12543, 12880, 12425, 12572, 12213, 12710, 12851, 12389, 13128, 13019, 12290, 13729, 12343, 12620, 12316, 12322, 12197, 12628, 12913];
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 256, 512, 1024, 2048, 4096, 8192];
+polY = [10863, 9575, 10152, 9607, 9696, 9995, 9748, 9436, 9972, 9487, 9587, 9522, 8688, 9456, 9311, 8893, 9922, 9676, 9670, 9359, 10199, 9051, 9836, 9462, 10223, 9083, 9994, 9180, 9082, 8915, 9275];
 
 plot(polX, polY, 'r');
 grid on;
-xlim([1 25]);
+xlim([1 8192]);
 
 [mini, nmin] = min(polY);
 x_min = polX(nmin)
 y_min = mini
 ```
 
-Замер 3. Размер файла 1610612739 байт (1.5 ГБ):
+Замер 3. Размер файла 5000001057 байт (4.7 ГБ):
+
+``` bash
+Generating file with random bytes (length=5000001057): "in"... 
+Generating done. 
+Hash of the file "in" is "81fb110ba36250ee7ceb2fc00b58d3d4". 
+
+Drive sector size: 512 bytes. 
+Drive cluster size: 8 sectors (4096 bytes). 
+
+bs = 65536 B (16*4096), thNum = 1, time = 96730. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 2, time = 99299. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 3, time = 92777. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 4, time = 100068. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 5, time = 86775. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 6, time = 99174. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 7, time = 94560. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 8, time = 93639. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 9, time = 95960. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 10, time = 83165. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 11, time = 82130. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 12, time = 81525. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 13, time = 82090. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 14, time = 81574. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 15, time = 81182. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 16, time = 89663. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 17, time = 128017. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 18, time = 123917. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 19, time = 122509. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 20, time = 127047. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 21, time = 130828. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 22, time = 127904. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 23, time = 126381. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 24, time = 124166. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 25, time = 126083. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 256, time = 60471. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 512, time = 56370. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 1024, time = 54901. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 2048, time = 54259. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 4096, time = 54834. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+bs = 65536 B (16*4096), thNum = 8192, time = 55554. Hash of result file = "81fb110ba36250ee7ceb2fc00b58d3d4". 
+
+Code for MatLab:
+
+function res = showPlot()
+
+polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 256, 512, 1024, 2048, 4096, 8192];
+polY = [96730, 99299, 92777, 100068, 86775, 99174, 94560, 93639, 95960, 83165, 82130, 81525, 82090, 81574, 81182, 89663, 128017, 123917, 122509, 127047, 130828, 127904, 126381, 124166, 126083, 60471, 56370, 54901, 54259, 54834, 55554];
+
+plot(polX, polY, 'r');
+grid on;
+xlim([1 8192]);
+
+[mini, nmin] = min(polY);
+x_min = polX(nmin)
+y_min = mini
+```
+
+Замер 4. Размер файла 1610612739 байт (1.5 ГБ):
 
 ``` bash
 Generating file with random bytes (length=1610612739): "in"...
@@ -567,21 +667,21 @@ Hash of the file "in" is "ec6e2ea51d9a75b4f7749693f461c786".
 Drive sector size: 512 bytes.
 Drive cluster size: 8 sectors (4096 bytes).
 
-bs = 32768 (64*512), thNum = 1, time = 187108. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 2, time = 178759. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 3, time = 148175. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 4, time = 142631. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 5, time = 80430. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 6, time = 80838. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 7, time = 78774. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 8, time = 78609. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 9, time = 79249. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 10, time = 75869. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 11, time = 76375. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 12, time = 75513. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 13, time = 75614. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 14, time = 72666. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
-bs = 32768 (64*512), thNum = 15, time = 74329. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 1, time = 187108. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 2, time = 178759. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 3, time = 148175. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 4, time = 142631. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 5, time = 80430. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 6, time = 80838. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 7, time = 78774. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 8, time = 78609. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 9, time = 79249. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 10, time = 75869. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 11, time = 76375. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 12, time = 75513. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 13, time = 75614. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 14, time = 72666. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
+bs = 32768 (8*4096), thNum = 15, time = 74329. Hash of result file = "ec6e2ea51d9a75b4f7749693f461c786".
 Code for MatLab:
 
 function res = showPlot()
@@ -592,62 +692,6 @@ polY = [187108, 178759, 148175, 142631, 80430, 80838, 78774, 78609, 79249, 75869
 plot(polX, polY, 'r');
 grid on;
 xlim([1 15]);
-
-[mini, nmin] = min(polY);
-x_min = polX(nmin)
-y_min = mini
-```
-
-Замер 4. Размер файла 200010003 байт (191 МБ):
-
-``` bash
-C:\Users\User\Desktop\etu2021_OC-main\lab1\work2>lab1.2.exe in 200010003 out
-Generating file with random bytes (length=200010003): "in"...
-Generating done.
-Hash of the file "in" is "7ec4c448a14d2cd03f3df6d112084318".
-Drive sector size: 512 bytes.
-Drive cluster size: 8 sectors (4096 bytes).
-
-bs = 8192 B (16*512), thNum = 1, time = 8570. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 2, time = 7830. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 3, time = 7206. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 4, time = 7236. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 5, time = 6356. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 6, time = 6931. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 7, time = 6069. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 8, time = 6628. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 9, time = 5835. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 10, time = 5327. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 11, time = 6053. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 12, time = 5368. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 13, time = 5943. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 14, time = 5879. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 15, time = 5761. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 16, time = 6184. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 17, time = 5743. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 18, time = 5352. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 19, time = 5004. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 20, time = 5716. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 21, time = 5435. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 22, time = 5082. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 23, time = 5513. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 24, time = 5209. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 25, time = 5567. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 512, time = 6934. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 1024, time = 8126. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 2048, time = 7382. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 4096, time = 7601. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-bs = 8192 B (16*512), thNum = 8192, time = 5789. Hash of result file = "7ec4c448a14d2cd03f3df6d112084318".
-Code for MatLab:
-
-function res = showPlot()
-
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 512, 1024, 2048, 4096, 8192];
-polY = [8570, 7830, 7206, 7236, 6356, 6931, 6069, 6628, 5835, 5327, 6053, 5368, 5943, 5879, 5761, 6184, 5743, 5352, 5004, 5716, 5435, 5082, 5513, 5209, 5567, 6934, 8126, 7382, 7601, 5789];
-
-plot(polX, polY, 'r');
-grid on;
-xlim([1 8192]);
 
 [mini, nmin] = min(polY);
 x_min = polX(nmin)
