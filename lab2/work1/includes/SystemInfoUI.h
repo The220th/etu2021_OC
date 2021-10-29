@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <string>
 
 void getSystemInfoUI();
 

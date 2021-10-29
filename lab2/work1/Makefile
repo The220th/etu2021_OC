@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=main.cpp menuUI.cpp ./func/SystemInfoUI.cpp
+SOURCES=main.cpp menuUI.cpp ./func/SystemInfoUI.cpp ./func/VirtualMem.cpp ./func/sup.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=lab2.1.exe
 
