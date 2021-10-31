@@ -18,18 +18,20 @@ void menu()
     do
     {
         cout << head << endl;
-        cout << "\t1) Get system info; " << endl;
-        cout << "\t2) Get global memory status; " << endl;
-        cout << "\t3) Determining the state of a specific memory area by the address from the keyboard; " << endl;
+        cout << "\t1) Get system info (GetSystemInfo); " << endl;
+        cout << "\t2) Get global memory status (GlobalMemoryStatusEx); " << endl;
+        cout << "\t3) Determining the state of a specific memory area by the address from the keyboard (VirtualQuery); " << endl;
+        cout << "\t4) Reserving a memory region (VirtualAlloc <- MEM_RESERVE); " << endl;
+        cout << "\t5) Reserving a memory region and obtaining physical memory (VirtualAlloc <- MEM_RESERVE | MEM_COMMIT); " << endl;
         cout << "\t0) Exit; " << endl;
         cout << endl << "> ";
 
         do
         {
             cin >> UserChoice;
-            if(UserChoice < 0 || UserChoice > 3)
+            if(UserChoice < 0 || UserChoice > 5)
                 cout << "There is no a such menu item. Input again: " << endl << "> ";
-        } while(UserChoice < 0 || UserChoice > 3);
+        } while(UserChoice < 0 || UserChoice > 5);
 
         switch(UserChoice)
         {
@@ -45,6 +47,12 @@ void menu()
                 break;
             case 3:
                 getVirtualQueryUI();
+                break;
+            case 4:
+                virtualAllocUI(false);
+                break;
+            case 5:
+                virtualAllocUI(true);
                 break;
             default:
                 cout << "Failed successfully...=/" << endl;

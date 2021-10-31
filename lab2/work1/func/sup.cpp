@@ -6,7 +6,6 @@ using namespace std;
 
 string to_bkMG_bytes(size_t bytes)
 {
-
     ostringstream oss;
     oss << fixed;
     oss.precision(2);
@@ -38,6 +37,18 @@ string to_bkMG_bytes(size_t bytes)
 
     return res;
 }*/
+
+string ptr8size_t(size_t addr)
+{
+    ostringstream oss;
+    oss << (LPCVOID)addr << " (" << addr << ")";
+    return oss.str();
+}
+
+string ptr8size_t(LPCVOID addrp)
+{
+    return ptr8size_t((size_t)addrp);
+}
 
 string getProtectInfo(DWORD pi)
 {

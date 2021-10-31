@@ -5,8 +5,6 @@ void getGlobalMemoryStatusUI();
 
 void getVirtualQueryUI();
 
-void virtualAllocUI();
+DWORD getPageSize();
 
-LPVOID virtualAllocManualUI();
-
-LPVOID virtualAllocAuto();
+void virtualAllocUI(bool COMMIT);

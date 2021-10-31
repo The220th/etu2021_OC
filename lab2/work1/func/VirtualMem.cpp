@@ -57,10 +57,10 @@ void getVirtualQueryUI()
     resf = VirtualQuery(addrp, &memi, sizeOf_memi);
     if(resf)
     {
-        cout << "Information about a range of pages in the virtual address space of a process " << addrp << ": " << endl;
-        cout << "\t* A pointer to the base address of the region of pages: " << memi.BaseAddress << endl;
+        cout << "Information about a range of pages in the virtual address space of a process " << ptr8size_t(addrp) << ": " << endl;
+        cout << "\t* A pointer to the base address of the region of pages: " << ptr8size_t(memi.BaseAddress) << endl;
         if(memi.State != MEM_FREE)
-            cout << "\t* A pointer to the base address of a range of pages allocated by the VirtualAlloc: " << memi.AllocationBase << endl;
+            cout << "\t* A pointer to the base address of a range of pages allocated by the VirtualAlloc: " << ptr8size_t(memi.AllocationBase) << endl;
         if(memi.State != MEM_FREE)
             cout << "\t* The memory protection option when the region was *initially* allocated" << getProtectInfo(memi.AllocationProtect) << endl;
         //cout << "\t* PartitionId = " << memi.PartitionId << endl;
@@ -110,7 +110,7 @@ void getVirtualQueryUI()
                     cout << "\t\tMEM_MAPPED indicates that the memory pages within the region are mapped into the view of a section. " << endl;
                     break;
                 case MEM_PRIVATE:
-                    cout << "MEM_PRIVATE indicates that the memory pages within the region are private (that is, not shared by other processes). " << endl;
+                    cout << "\t\tMEM_PRIVATE indicates that the memory pages within the region are private (that is, not shared by other processes). " << endl;
                     break;
                 default:
                     cout << "\t\tFailed successfully...=/" << endl;
@@ -127,9 +127,15 @@ void getVirtualQueryUI()
     }
 }
 
-void virtualAllocUI()
+DWORD getPageSize()
 {
-    LPVOID allocp = NULL;
+    SYSTEM_INFO sysInfo;
+    GetSystemInfo(&sysInfo);
+    return sysInfo.dwPageSize;
+}
+
+void virtualAllocUI(bool COMMIT = true)
+{
     unsigned userChoice = -1;
     
     cout << "\t1) Manual mode; " << endl;
@@ -143,35 +149,30 @@ void virtualAllocUI()
             cout << "There is no a such menu item. Input again: " << endl << "> ";
     } while(userChoice < 1 || userChoice > 2);
 
-    switch(userChoice)
+    LPVOID addrp = NULL;
+    DWORD allocationTypeFLAG = COMMIT ? MEM_RESERVE | MEM_COMMIT : MEM_RESERVE;
+    size_t pagesNum = 0;
+    DWORD size1Page = getPageSize();
+
+    cout << "\nSize of one page: " << size1Page << " bytes. " << endl;
+    cout << "Enter the number of pages to be allocated: \n> " << flush;
+    cin >> pagesNum;
+
+    if (userChoice == 1)
     {
-        case 1:
-            allocp = virtualAllocManualUI();
-            break;
-        case 2:
-            allocp = virtualAllocAuto();
-            break;
-        default:
-            cout << "Failed successfully...=/" << endl;
-            break;
+        size_t userAddr;
+        cout << "Enter address: \n> " << flush;
+        cin >> userAddr;
+        addrp = (LPVOID)userAddr;
     }
-
+    else if (userChoice == 2)
+        addrp = NULL;
     
-}
-
-LPVOID virtualAllocManualUI()
-{
     LPVOID resp = NULL;
-    //resp = VirtualAlloc(, );
-    return resp;
-}
-
-LPVOID virtualAllocAuto()
-{
-    LPVOID resp = NULL;
-    size_t sizerino = 0;
-    cout << "\tHow much memory in bytes is required? Input: \n> " << flush;
-    cin >> sizerino;
-    //resp = VirtualAlloc(NULL, sizerino, 0, 0);
-    return resp;
+    cout << "Trying to allocate the region at the address " << ptr8size_t(addrp) << " of size " << pagesNum*size1Page << " B (" << pagesNum << "*" << size1Page << ")" << ". " << endl;
+    resp = VirtualAlloc(addrp, pagesNum*size1Page, allocationTypeFLAG, PAGE_READWRITE);
+    if(resp == NULL)
+        cout << "An error occurred while reserving (and commited) memory. Error: " << GetLastError() << endl;
+    else
+        cout << "Memory has been successfully reserved (and commited). Addess of the allocated region of pages: " << ptr8size_t(resp) << ". " << endl;
 }
