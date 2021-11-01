@@ -1,6 +1,7 @@
 #include <string>
 #include <sstream>
 #include <windows.h>
+#include <iostream>
 
 using namespace std;
 
@@ -110,6 +111,62 @@ string getProtectInfo(DWORD pi)
         res += " Pages to be non-cachable (PAGE_NOCACHE).";
 	if (pi & PAGE_WRITECOMBINE)
         res += " Pages to be write-combined (PAGE_WRITECOMBINE).";
+    return res;
+}
+
+DWORD getProtectUI()
+{
+    unsigned UserChoice;
+    cout << "Choose memory protection constants. Select one of them: " << endl;
+    cout << "\t1) " << getProtectInfo(PAGE_EXECUTE) << endl;
+    cout << "\t2) " << getProtectInfo(PAGE_EXECUTE_READ) << endl;
+    cout << "\t3) " << getProtectInfo(PAGE_EXECUTE_READWRITE) << endl;
+    cout << "\t4) " << getProtectInfo(PAGE_EXECUTE_WRITECOPY) << endl;
+    cout << "\t5) " << getProtectInfo(PAGE_NOACCESS) << endl;
+    cout << "\t6) " << getProtectInfo(PAGE_READONLY) << endl;
+    cout << "\t7) " << getProtectInfo(PAGE_READWRITE) << endl;
+    cout << "\t8) " << getProtectInfo(PAGE_WRITECOPY) << endl;
+    cout << endl << "> " << flush;
+
+    do
+    {
+        cin >> UserChoice;
+        if(UserChoice < 1 || UserChoice > 8)
+            cout << "There is no a such menu item. Input again: " << endl << "> ";
+    } while(UserChoice < 1 || UserChoice > 8);
+
+    DWORD res = -1;
+    switch (UserChoice)
+	{
+        case 1:
+            res = PAGE_EXECUTE;
+            break;
+        case 2:
+            res = PAGE_EXECUTE_READ;
+            break;
+        case 3:
+            res = PAGE_EXECUTE_READWRITE;
+            break;
+        case 4:
+            res = PAGE_EXECUTE_WRITECOPY;
+            break;
+        case 5:
+            res = PAGE_NOACCESS;
+            break;
+        case 6:
+            res = PAGE_READONLY;
+            break;
+        case 7:
+            res = PAGE_READWRITE;
+            break;
+        case 8:
+            res = PAGE_WRITECOPY;
+            break;
+        default:
+            cout << "Failed successfully...=/" << endl;
+            break;
+	}
+
     return res;
 }
 

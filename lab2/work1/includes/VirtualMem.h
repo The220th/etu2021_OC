@@ -12,3 +12,7 @@ void virtualAllocUI(bool COMMIT);
 void writeToRegionUI();
 
 void readRegionUI();
+
+void changeProtectUI();
+
+void freeVirtualUI();

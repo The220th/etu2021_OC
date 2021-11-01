@@ -9,6 +9,8 @@ std::string ptr8size_t(LPCVOID addrp);
 
 std::string getProtectInfo(DWORD pi);
 
+DWORD getProtectUI();
+
 bool checkReadAccess(DWORD pi);
 
 bool checkWriteAccess(DWORD pi);

@@ -153,10 +153,6 @@ void virtualAllocUI(bool COMMIT = true)
     size_t pagesNum = 0;
     DWORD size1Page = getPageSize();
 
-    cout << "\nSize of one page: " << size1Page << " bytes. " << endl;
-    cout << "Enter the number of pages to be allocated: \n> " << flush;
-    cin >> pagesNum;
-
     if (userChoice == 1)
     {
         size_t userAddr;
@@ -166,7 +162,11 @@ void virtualAllocUI(bool COMMIT = true)
     }
     else if (userChoice == 2)
         addrp = NULL;
-    
+
+    cout << "\nSize of one page: " << size1Page << " bytes. " << endl;
+    cout << "Enter the number of pages to be allocated: \n> " << flush;
+    cin >> pagesNum;
+
     LPVOID resp = NULL;
     cout << "Trying to allocate the region at the address " << ptr8size_t(addrp) << " of size " << pagesNum*size1Page << " B (" << pagesNum << "*" << size1Page << ")" << ". " << endl;
     resp = VirtualAlloc(addrp, pagesNum*size1Page, allocationTypeFLAG, PAGE_READWRITE);
@@ -225,7 +225,7 @@ void writeToRegionUI()
         cout << "\". " << endl;
     }
     else
-        cout << "addr == NULL" << endl;
+        cout << "addr == NULL. " << endl;
 }
 
 void readRegionUI()
@@ -266,5 +266,65 @@ void readRegionUI()
         cout << "\". " << endl;
     }
     else
-        cout << "Address is NULL" << endl;
+        cout << "Address is NULL. " << endl;
+}
+
+void changeProtectUI()
+{
+    LPVOID addr;
+    size_t userAddr;
+    cout << "Enter address: \n> " << flush;
+    cin >> userAddr;
+    addr = (LPVOID)userAddr;
+
+    size_t rs;
+    cout << "Enter region size: \n> " << flush;
+    cin >> rs;
+
+    DWORD protectNew = getProtectUI();
+    DWORD protectOld;
+
+    cout << "Trying change access protection at " << ptr8size_t(addr) << "... " << endl;
+
+    if(addr != NULL)
+    {
+        WINBOOL reVP = VirtualProtect(addr, rs, protectNew, &protectOld);
+        if(reVP)
+        {
+            cout << "New protect: " << getProtectInfo(protectNew) << endl;
+            cout << "Old protect: " << getProtectInfo(protectOld) << endl;
+        }
+        else
+            cout << "An error occurred when update protect. Error: " << GetLastError() << endl;
+    }
+    else
+        cout << "Address is NULL. " << endl;
+}
+
+void freeVirtualUI()
+{
+    LPVOID addr;
+    size_t userAddr;
+    cout << "Enter address: \n> " << flush;
+    cin >> userAddr;
+    addr = (LPVOID)userAddr;
+
+    SIZE_T resf;
+    MEMORY_BASIC_INFORMATION memi;
+    resf = VirtualQuery(addr, &memi, sizeof(MEMORY_BASIC_INFORMATION));
+    if(!resf)
+    {
+        cout << "An error occurred when receiving information about a range of pages in the virtual address space of the calling process. Error: " << GetLastError() << endl; 
+        return;
+    }
+
+    cout << "The address " << ptr8size_t(addr) << " corresponds to the region that were initially allocated by the VirtualAlloc function with the base address " << ptr8size_t(memi.AllocationBase) << endl;
+
+    cout << "Trying free region with the base address " << ptr8size_t(memi.AllocationBase) << "..." << endl;
+
+    WINBOOL bollBF = VirtualFree(memi.AllocationBase, 0, MEM_RELEASE);
+    if(bollBF)
+        cout << "All is OK. " << endl;
+    else
+        cout << "An error occurred while freeing memory. Error: " << GetLastError() << endl;
 }
