@@ -112,3 +112,32 @@ string getProtectInfo(DWORD pi)
         res += " Pages to be write-combined (PAGE_WRITECOMBINE).";
     return res;
 }
+
+bool checkReadAccess(DWORD pi)
+{
+    if(
+        pi == PAGE_EXECUTE_READ ||
+        pi == PAGE_EXECUTE_READWRITE ||
+        pi == PAGE_EXECUTE_WRITECOPY ||
+        pi == PAGE_READONLY ||
+        pi == PAGE_READWRITE ||
+        pi == PAGE_WRITECOPY
+    )
+        return true;
+    else
+        return false;
+}
+
+bool checkWriteAccess(DWORD pi)
+{
+    if(
+        pi == PAGE_EXECUTE_READWRITE ||
+        pi == PAGE_EXECUTE_WRITECOPY ||
+        pi == PAGE_READWRITE ||
+        pi == PAGE_WRITECOPY
+    )
+        return true;
+    else
+        return false;
+
+}

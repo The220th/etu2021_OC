@@ -23,15 +23,17 @@ void menu()
         cout << "\t3) Determining the state of a specific memory area by the address from the keyboard (VirtualQuery); " << endl;
         cout << "\t4) Reserving a memory region (VirtualAlloc <- MEM_RESERVE); " << endl;
         cout << "\t5) Reserving a memory region and obtaining physical memory (VirtualAlloc <- MEM_RESERVE | MEM_COMMIT); " << endl;
-        cout << "\t0) Exit; " << endl;
+        cout << "\t6) Write to a memory by the address from the keyboard; " << endl;
+        cout << "\t7) Read from a memory by the address from the keyboard; " << endl;
+        cout << "\t0) Exit. " << endl;
         cout << endl << "> ";
 
         do
         {
             cin >> UserChoice;
-            if(UserChoice < 0 || UserChoice > 5)
+            if(UserChoice < 0 || UserChoice > 7)
                 cout << "There is no a such menu item. Input again: " << endl << "> ";
-        } while(UserChoice < 0 || UserChoice > 5);
+        } while(UserChoice < 0 || UserChoice > 7);
 
         switch(UserChoice)
         {
@@ -53,6 +55,12 @@ void menu()
                 break;
             case 5:
                 virtualAllocUI(true);
+                break;
+            case 6:
+                writeToRegionUI();
+                break;
+            case 7:
+                readRegionUI();
                 break;
             default:
                 cout << "Failed successfully...=/" << endl;

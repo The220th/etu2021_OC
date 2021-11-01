@@ -45,7 +45,6 @@ void getGlobalMemoryStatusUI()
 
 void getVirtualQueryUI()
 {
-
     size_t userAddr;
     cout << "Enter address: \n> " << flush;
     cin >> userAddr;
@@ -175,4 +174,97 @@ void virtualAllocUI(bool COMMIT = true)
         cout << "An error occurred while reserving (and commited) memory. Error: " << GetLastError() << endl;
     else
         cout << "Memory has been successfully reserved (and commited). Addess of the allocated region of pages: " << ptr8size_t(resp) << ". " << endl;
+}
+
+void writeToRegionUI()
+{
+    LPVOID addr;
+    size_t addr_t;
+    string toWrite;
+    cout << "Enter address: \n> " << flush;
+    cin >> addr_t;
+    cout << "Enter string data: \n > " << flush;
+    cin >> toWrite;
+
+    cout << "Trying to write \"" << toWrite << "\" to address " << ptr8size_t(addr_t) << "... " << endl;
+
+    addr = (LPVOID)addr_t;
+
+    if (addr != NULL)
+    {
+        SIZE_T resf;
+        MEMORY_BASIC_INFORMATION memi;
+        SIZE_T sizeOf_memi = sizeof(MEMORY_BASIC_INFORMATION);
+        resf = VirtualQuery(addr, &memi, sizeOf_memi);
+        if(!resf)
+        {
+            cout << "An error occurred when receiving information about a range of pages in the virtual address space of the calling process. Error: " << GetLastError() << endl; 
+            return;
+        }
+        if(memi.State != MEM_COMMIT)
+        {
+            cout << "Memory " << ptr8size_t(addr_t) << " state is not MEM_COMMIT" << endl;
+            return;
+        }
+        if(!checkWriteAccess(memi.Protect))
+        {
+            cout << "No access to write to " << ptr8size_t(addr_t) << endl;
+            return;
+        }
+
+        string::size_type n = toWrite.size();
+        char* addr_i = (char*)addr;
+        for(string::size_type i = 0; i < n; ++i, ++addr_i)
+            *addr_i = toWrite[i];
+        *addr_i = '\0';
+
+        cout << "Content at " << ptr8size_t(addr) << ": \"" << flush;
+        addr_i = (char*)addr;
+        for(; *addr_i != '\0'; ++addr_i)
+            cout << *addr_i << flush;
+        cout << "\". " << endl;
+    }
+    else
+        cout << "addr == NULL" << endl;
+}
+
+void readRegionUI()
+{
+    LPVOID addr;
+    size_t addr_t;
+    cout << "Enter address: \n> " << flush;
+    cin >> addr_t;
+
+    addr = (LPVOID)addr_t;
+
+    if(addr != NULL)
+    {
+        SIZE_T resf;
+        MEMORY_BASIC_INFORMATION memi;
+        SIZE_T sizeOf_memi = sizeof(MEMORY_BASIC_INFORMATION);
+        resf = VirtualQuery(addr, &memi, sizeOf_memi);
+        if(!resf)
+        {
+            cout << "An error occurred when receiving information about a range of pages in the virtual address space of the calling process. Error: " << GetLastError() << endl; 
+            return;
+        }
+        if(memi.State != MEM_COMMIT)
+        {
+            cout << "Memory " << ptr8size_t(addr_t) << " state is not MEM_COMMIT" << endl;
+            return;
+        }
+        if(!checkReadAccess(memi.Protect))
+        {
+            cout << "No access to read from " << ptr8size_t(addr_t) << endl;
+            return;
+        }
+
+        cout << "Trying to read from address " << ptr8size_t(addr_t) << ": \"" << flush;
+        char* addr_i = (char*)addr;
+        for(; *addr_i != '\0'; ++addr_i)
+            cout << *addr_i << flush;
+        cout << "\". " << endl;
+    }
+    else
+        cout << "Address is NULL" << endl;
 }
