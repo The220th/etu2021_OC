@@ -168,7 +168,7 @@ void virtualAllocUI(bool COMMIT = true)
     cin >> pagesNum;
 
     LPVOID resp = NULL;
-    cout << "Trying to allocate the region at the address " << ptr8size_t(addrp) << " of size " << pagesNum*size1Page << " B (" << pagesNum << "*" << size1Page << ")" << ". " << endl;
+    cout << "Trying to allocate the region at the address " << ptr8size_t(addrp) << " of size " << pagesNum*size1Page << " B (" << pagesNum << "*" << size1Page << ")" << "... " << endl;
     resp = VirtualAlloc(addrp, pagesNum*size1Page, allocationTypeFLAG, PAGE_READWRITE);
     if(resp == NULL)
         cout << "An error occurred while reserving (and commited) memory. Error: " << GetLastError() << endl;
@@ -183,8 +183,11 @@ void writeToRegionUI()
     string toWrite;
     cout << "Enter address: \n> " << flush;
     cin >> addr_t;
-    cout << "Enter string data: \n > " << flush;
-    cin >> toWrite;
+    getchar(); //WHY!?!?!
+    cout << "Enter string data: \n> " << flush;
+    //cin >> toWrite;
+    getline(cin, toWrite);
+    //getchar(); //AGAIN?! WHY!?!?!
 
     cout << "Trying to write \"" << toWrite << "\" to address " << ptr8size_t(addr_t) << "... " << endl;
 
