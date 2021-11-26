@@ -15,26 +15,26 @@ int main(int argc, char **argv)
 {
     if(argc == 1)
     {
-        const unsigned maxThreads = 5;
+        const unsigned maxThreads = 32;
         const unsigned attempts = 10;
         DWORD buffMilisec;
-        unsigned *reses = new unsigned[maxThreads+1]; reses[0] = 0;
-        unsigned *x = new unsigned[maxThreads+1]; x[0] = 0;
+        unsigned *reses = new unsigned[maxThreads];
+        unsigned *x = new unsigned[maxThreads];
         for(unsigned i = 1; i <= maxThreads; ++i)
         {
             DWORD avgMilisec = 0;
-            cout << "For " << i << "threads: " << endl;
+            cout << "For " << i << " threads: " << endl;
             for(unsigned j = 0; j < attempts; ++j)
             {
-                cout << setprecision(80) << processPI(N, i, BLOCKSIZE, &buffMilisec) << endl;
+                cout << setprecision(80) << "Circle " << (j+1) << ": " << processPI(N, i, BLOCKSIZE, &buffMilisec) << endl;
                 avgMilisec += buffMilisec;
             }
             avgMilisec /= attempts;
-            reses[i] = avgMilisec;
-            x[i] = i;
+            reses[i-1] = avgMilisec;
+            x[i-1] = i;
             cout << "Threads " << i << ": " << avgMilisec << " milisec (" << (long double)avgMilisec / 1000 << " sec). " << endl;
         }
-        cout << endl << makeCodeForMatLab(x, reses, maxThreads+1) << endl;
+        cout << endl << makeCodeForMatLab(x, reses, maxThreads) << endl;
         delete reses;
         delete x;
     }
