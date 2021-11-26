@@ -103,7 +103,7 @@ DWORD WINAPI piCalc(LPVOID lpParam)
                 res_block += (4 / (1 + xi*xi));
             }
             *((*par).pi_block) = res_block;
-            Sleep(1);
+            //Sleep(1);
         }
         else
             isuicide = -1;
@@ -114,7 +114,7 @@ DWORD WINAPI piCalc(LPVOID lpParam)
 }
 
 
-void formIter(Params* par)
+inline void formIter(Params* par)
 {
     /*
     либо мьютексы (https://eax.me/winapi-threads/):

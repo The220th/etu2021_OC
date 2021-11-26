@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=
-SOURCES=main.cpp ./func/process.cpp
+SOURCES=main.cpp ./func/process.cpp ./func/utils.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=lab3.1.exe
 
@@ -15,6 +15,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 CLEAN:
+	$(info )
 	$(info ==========IGNOR IT:==========)
 	@-del /s *.o
 	@-find . -name "*.o" -delete
