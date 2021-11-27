@@ -1,9 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=-ggdb
-SOURCES=main.cpp ./func/process.cpp ./func/utils.cpp
+SOURCES=main.cpp ./func/processSHAKAL.cpp ./func/utils.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=lab3.1.exe
+EXECUTABLE=lab3.1-SHAKAL.exe
 
 all: $(SOURCES) $(EXECUTABLE) CLEAN
 

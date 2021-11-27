@@ -2,7 +2,7 @@
 #include <string>
 #include <iomanip>
 
-#include "./includes/process.h"
+#include "./includes/process2.h"
 #include "./includes/utils.h"
 
 #ifdef _OPENMP
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
             cout << "For " << i << " threads: " << endl;
             for(unsigned j = 0; j < attempts; ++j)
             {
-                cout << setprecision(80) << "Circle " << (j+1) << ": " << processPI(N, i, BLOCKSIZE, &buffMilisec) << endl;
+                cout << setprecision(80) << "Circle " << (j+1) << ": " << processPI2(N, i, BLOCKSIZE, &buffMilisec) << endl;
                 avgMilisec += buffMilisec;
             }
             avgMilisec /= attempts;
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
         unsigned threadNum = atoi(argv[1]);
         cout << "OpenMP says: \"" << whatSaysOpenMP(threadNum) << " threads available" << "\". " << endl;
         DWORD milisec = -1;
-        long double calculatedpi = processPI(N, threadNum, BLOCKSIZE, &milisec);
+        long double calculatedpi = processPI2(N, threadNum, BLOCKSIZE, &milisec);
         cout << setprecision(N) << "Calculated pi = " << calculatedpi << endl;
         cout << "Time = " << milisec << " milisec (" << (long double)milisec / 1000 << " sec)." << endl;
         //cout << sizeof(long double) << " " << sizeof(double) << endl; // "16 8"

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "../includes/process.h"
+#include "../includes/process2.h"
 
 //#define _OPENMP
 
@@ -12,7 +12,7 @@
 
 using namespace std;
 
-long double processPI(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
+long double processPI2(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
 {   
     DWORD startTime;
     DWORD finishTime;

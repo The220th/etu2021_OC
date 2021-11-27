@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=-ggdb
-SOURCES=main.cpp ./func/process.cpp ./func/utils.cpp
+SOURCES=main.cpp ./func/process1.cpp ./func/utils.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=lab3.1.exe
 

@@ -2,7 +2,7 @@
 #include <string>
 #include <iomanip>
 
-#include "./includes/process.h"
+#include "./includes/processSHAKAL.h"
 #include "./includes/utils.h"
 
 using namespace std;
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
             cout << "For " << i << " threads: " << endl;
             for(unsigned j = 0; j < attempts; ++j)
             {
-                cout << setprecision(80) << "Circle " << (j+1) << ": " << processPI(N, i, BLOCKSIZE, &buffMilisec) << endl;
+                cout << setprecision(80) << "Circle " << (j+1) << ": " << processPISHAKAL(N, i, BLOCKSIZE, &buffMilisec) << endl;
                 avgMilisec += buffMilisec;
             }
             avgMilisec /= attempts;
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     {
         unsigned threadNum = atoi(argv[1]);
         DWORD milisec = -1;
-        long double calculatedpi = processPI(N, threadNum, BLOCKSIZE, &milisec);
+        long double calculatedpi = processPISHAKAL(N, threadNum, BLOCKSIZE, &milisec);
         cout << setprecision(N) << "Calculated pi = " << calculatedpi << endl;
         cout << "Time = " << milisec << " milisec (" << (long double)milisec / 1000 << " sec)." << endl;
         //cout << sizeof(long double) << " " << sizeof(double) << endl; // "16 8"

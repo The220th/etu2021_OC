@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "../includes/process.h"
+#include "../includes/process1.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ HANDLE hMutexSUM;
 size_t pi_blocks_i;
 size_t pi_blocks_n;
 
-long double processPI(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
+long double processPI1(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
 {
     NN = N;
     BS = blocksize;
@@ -40,11 +40,11 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
         return -1;
     }
 
-    Params *params = new Params[threadNum];
+    Params1 *params = new Params1[threadNum];
     HANDLE *ths = new HANDLE[threadNum];
     for(unsigned i = 0; i < threadNum; ++i)
     {
-        ths[i] = CreateThread(NULL, 0, piCalc, &(params[i]), CREATE_SUSPENDED, NULL);
+        ths[i] = CreateThread(NULL, 0, piCalc1, &(params[i]), CREATE_SUSPENDED, NULL);
         params[i].h = ths[i];
         if(params[i].h == NULL)
         {
@@ -95,9 +95,9 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
     return respi;
 }
 
-DWORD WINAPI piCalc(LPVOID lpParam)
+DWORD WINAPI piCalc1(LPVOID lpParam)
 {
-    Params *par = (Params*)lpParam;
+    Params1 *par = (Params1*)lpParam;
     int isuicide;
     do
     {

@@ -2,15 +2,15 @@
 #include <iostream>
 #include <string>
 
-#include "../includes/process.h"
+#include "../includes/processSHAKAL.h"
 
 using namespace std;
 
-long double *pi_blocks;
-size_t pi_blocks_n;
-size_t pi_blocks_i;
+long double *pi_SHAKAL_blocks;
+size_t pi_SHAKAL_blocks_n;
+size_t pi_SHAKAL_blocks_i;
 
-long double processPI(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
+long double processPISHAKAL(const size_t N, const unsigned threadNum, const size_t blocksize, DWORD *milisec)
 {
     HANDLE hMutex = CreateMutex(NULL, FALSE, NULL);
     if(hMutex == NULL)
@@ -20,17 +20,17 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
     }
 
     if(N % blocksize == 0)
-        pi_blocks_n = N/blocksize;
+        pi_SHAKAL_blocks_n = N/blocksize;
     else
-        pi_blocks_n = N/blocksize + 1;
-    pi_blocks = new long double[pi_blocks_n];
-    pi_blocks_i = 0;
+        pi_SHAKAL_blocks_n = N/blocksize + 1;
+    pi_SHAKAL_blocks = new long double[pi_SHAKAL_blocks_n];
+    pi_SHAKAL_blocks_i = 0;
 
-    Params *params = new Params[threadNum];
+    ParamsSHAKAL *params = new ParamsSHAKAL[threadNum];
     HANDLE *ths = new HANDLE[threadNum];
     for(unsigned i = 0; i < threadNum; ++i)
     {
-        ths[i] = CreateThread(NULL, 0, piCalc, &(params[i]), CREATE_SUSPENDED, NULL);
+        ths[i] = CreateThread(NULL, 0, piCalcSHAKAL, &(params[i]), CREATE_SUSPENDED, NULL);
         params[i].h = ths[i];
         if(params[i].h == NULL)
         {
@@ -38,7 +38,7 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
             for(unsigned j = 0; j < i; ++j)
                 CloseHandle(params[j].h);
             CloseHandle(hMutex);
-            delete pi_blocks;
+            delete pi_SHAKAL_blocks;
             delete params;
             delete ths;
             return -1;
@@ -68,14 +68,14 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
         cout << "Problem with WaitForMultipleObjects (return = " << waitError << "). Error: " << GetLastError() << endl;
 
     long double respi = 0.0;
-    for(size_t i = 0; i < pi_blocks_n; ++i)
-        respi += pi_blocks[i];
+    for(size_t i = 0; i < pi_SHAKAL_blocks_n; ++i)
+        respi += pi_SHAKAL_blocks[i];
     respi /= N;
 
     for(unsigned i = 0; i < threadNum; ++i)
         CloseHandle(ths[i]);
     CloseHandle(hMutex);
-    delete pi_blocks;
+    delete pi_SHAKAL_blocks;
     delete params;
     delete ths;
 
@@ -83,9 +83,9 @@ long double processPI(const size_t N, const unsigned threadNum, const size_t blo
     return respi;
 }
 
-DWORD WINAPI piCalc(LPVOID lpParam)
+DWORD WINAPI piCalcSHAKAL(LPVOID lpParam)
 {
-    Params *par = (Params*)lpParam;
+    ParamsSHAKAL *par = (ParamsSHAKAL*)lpParam;
     int isuicide;
     do
     {
@@ -114,7 +114,7 @@ DWORD WINAPI piCalc(LPVOID lpParam)
 }
 
 
-inline void formIter(Params* par)
+inline void formIter(ParamsSHAKAL* par)
 {
     /*
     либо мьютексы (https://eax.me/winapi-threads/):
@@ -137,14 +137,14 @@ inline void formIter(Params* par)
 
 
 
-    if(pi_blocks_i < pi_blocks_n)
+    if(pi_SHAKAL_blocks_i < pi_SHAKAL_blocks_n)
     {
-        (*par).pi_block = &(pi_blocks[pi_blocks_i]);
-        (*par).begin = pi_blocks_i * (*par).bs;
-        (*par).end = (pi_blocks_i+1) * (*par).bs - 1;
+        (*par).pi_block = &(pi_SHAKAL_blocks[pi_SHAKAL_blocks_i]);
+        (*par).begin = pi_SHAKAL_blocks_i * (*par).bs;
+        (*par).end = (pi_SHAKAL_blocks_i+1) * (*par).bs - 1;
         if((*par).end > (*par).N-1)
             (*par).end = (*par).N-1;
-        ++pi_blocks_i;
+        ++pi_SHAKAL_blocks_i;
     }
     else
     {
