@@ -3,6 +3,10 @@
 
 #include "../includes/utils.h"
 
+#ifdef _OPENMP
+    #include <omp.h>
+#endif
+
 using namespace std;
 
 string makeCodeForMatLab(unsigned *X, unsigned *Y, size_t n)
@@ -53,4 +57,17 @@ y_min = mini
     res += "x_min = polX(nmin)\n";
     res += "y_min = mini\n";
     return res;
+}
+
+unsigned whatSaysOpenMP(unsigned thNum)
+{
+    unsigned count = 0;
+    #ifdef _OPENMP
+    #pragma omp parallel num_threads(thNum)
+    {
+        #pragma omp atomic
+        ++count;
+    }
+    #endif
+   return count;
 }

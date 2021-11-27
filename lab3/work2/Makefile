@@ -1,9 +1,9 @@
 CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=-ggdb
+CFLAGS=-c -Wall -fopenmp
+LDFLAGS=-fopenmp -ggdb
 SOURCES=main.cpp ./func/process.cpp ./func/utils.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=lab3.1.exe
+EXECUTABLE=lab3.2.exe
 
 all: $(SOURCES) $(EXECUTABLE) CLEAN
 
