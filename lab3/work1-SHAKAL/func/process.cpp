@@ -1,8 +1,8 @@
-#include <windows.h>
+﻿#include <windows.h>
 #include <iostream>
 #include <string>
 
-#include "../includes/processSHAKAL.h"
+#include "../includes/process.h"
 
 using namespace std;
 
