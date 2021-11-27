@@ -64,14 +64,16 @@ long double processPI1(const size_t N, const unsigned threadNum, const size_t bl
             cout << "Problem with changing thread priority. Error: " << GetLastError() << endl;
     }
 
-    for(unsigned i = 0; i < threadNum; ++i)
-        ResumeThread(ths[i]);
+
 
     DWORD waitError;
     DWORD startTime;
     DWORD finishTime;
     //Timer up
     startTime = GetTickCount();
+
+    for(unsigned i = 0; i < threadNum; ++i)
+        ResumeThread(ths[i]);
 
     waitError = WaitForMultipleObjects(threadNum, ths, true, INFINITE);
 

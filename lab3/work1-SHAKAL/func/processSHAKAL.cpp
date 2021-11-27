@@ -50,8 +50,7 @@ long double processPISHAKAL(const size_t N, const unsigned threadNum, const size
             cout << "Problem with changing thread priority. Error: " << GetLastError() << endl;
     }
 
-    for(unsigned i = 0; i < threadNum; ++i)
-        ResumeThread(ths[i]);
+
 
     DWORD waitError;
     DWORD startTime;
@@ -59,18 +58,23 @@ long double processPISHAKAL(const size_t N, const unsigned threadNum, const size
     //Timer up
     startTime = GetTickCount();
 
+    for(unsigned i = 0; i < threadNum; ++i)
+        ResumeThread(ths[i]);
+
     waitError = WaitForMultipleObjects(threadNum, ths, true, INFINITE);
-    
+
+    long double respi = 0.0;
+    for(size_t i = 0; i < pi_SHAKAL_blocks_n; ++i)
+        respi += pi_SHAKAL_blocks[i];
+    respi /= N;
+
     finishTime = GetTickCount();
     //Timer down
 
     if(!(WAIT_OBJECT_0 >= waitError || waitError <= WAIT_OBJECT_0 + threadNum - 1)/*или WAIT_TIMEOUT, если отвал по таймеру*/)
         cout << "Problem with WaitForMultipleObjects (return = " << waitError << "). Error: " << GetLastError() << endl;
 
-    long double respi = 0.0;
-    for(size_t i = 0; i < pi_SHAKAL_blocks_n; ++i)
-        respi += pi_SHAKAL_blocks[i];
-    respi /= N;
+
 
     for(unsigned i = 0; i < threadNum; ++i)
         CloseHandle(ths[i]);

@@ -16,13 +16,13 @@ long double processPI2(const size_t N, const unsigned threadNum, const size_t bl
 {   
     DWORD startTime;
     DWORD finishTime;
+    startTime = GetTickCount();
 
     long double sum = 0;
     #ifdef _OPENMP
     #pragma omp parallel shared(startTime, finishTime) reduction (+: sum) num_threads(threadNum)
     #endif
     {
-        startTime = GetTickCount();
         #ifdef _OPENMP
         #pragma omp for schedule(dynamic, blocksize) nowait
         #endif
