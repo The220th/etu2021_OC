@@ -9,8 +9,13 @@ using namespace std;
 size_t BS;
 size_t NN;
 
+#ifdef CRITICAL_AND_NOMUTEX
+CRITICAL_SECTION CriticalSELECT;
+CRITICAL_SECTION CriticalSUM;
+#else
 HANDLE hMutexSELECT;
 HANDLE hMutexSUM;
+#endif
 
 size_t pi_blocks_i;
 size_t pi_blocks_n;
@@ -24,7 +29,10 @@ long double processPI1(const size_t N, const unsigned threadNum, const size_t bl
     pi_blocks_i = 0;
     pi_blocks_n = NN % blocksize == 0?NN/blocksize:NN/blocksize + 1;
 
-
+    #ifdef CRITICAL_AND_NOMUTEX
+    InitializeCriticalSection(&CriticalSELECT);
+    InitializeCriticalSection(&CriticalSUM);
+    #else
     hMutexSELECT = CreateMutex(NULL, FALSE, NULL);
     if(hMutexSELECT == NULL)
     {
@@ -39,6 +47,7 @@ long double processPI1(const size_t N, const unsigned threadNum, const size_t bl
         CloseHandle(hMutexSELECT);
         return -1;
     }
+    #endif
 
     Params1 *params = new Params1[threadNum];
     HANDLE *ths = new HANDLE[threadNum];
@@ -51,8 +60,13 @@ long double processPI1(const size_t N, const unsigned threadNum, const size_t bl
             cout << "Problem with creating thread. Error: " << GetLastError() << endl;
             for(unsigned j = 0; j < i; ++j)
                 CloseHandle(params[j].h);
+            #ifdef CRITICAL_AND_NOMUTEX
+            DeleteCriticalSection(&CriticalSELECT);
+            DeleteCriticalSection(&CriticalSUM);
+            #else
             CloseHandle(hMutexSELECT);
             CloseHandle(hMutexSUM);
+            #endif
             delete params;
             delete ths;
             return -1;
@@ -88,8 +102,13 @@ long double processPI1(const size_t N, const unsigned threadNum, const size_t bl
 
     for(unsigned i = 0; i < threadNum; ++i)
         CloseHandle(ths[i]);
+    #ifdef CRITICAL_AND_NOMUTEX
+    DeleteCriticalSection(&CriticalSELECT);
+    DeleteCriticalSection(&CriticalSUM);
+    #else
     CloseHandle(hMutexSELECT);
     CloseHandle(hMutexSUM);
+    #endif
     delete params;
     delete ths;
 
@@ -117,13 +136,24 @@ CloseHandle
 CreateEvent( NULL, TRUE, FALSE, TEXT("WriteEvent"));
 SetEvent(ghWriteEvent) и WaitForSingleObject
 CloseHandle
+
+либо критические секции (https://www.rsdn.org/article/baseserv/critsec.xml)
+Но в пределах одного процесса
+CRITICAL_SECTION CriticalSection;
+EnterCriticalSection(&CriticalSection);
+//critical code
+LeaveCriticalSection(&CriticalSection);
 */
-            DWORD waitError;
 
             //=====critical SELECT block=====BEGIN
+            #ifdef CRITICAL_AND_NOMUTEX
+            EnterCriticalSection(&CriticalSELECT);
+            #else
+            DWORD waitError;
             waitError = WaitForSingleObject(hMutexSELECT, INFINITE);
             if(waitError != WAIT_OBJECT_0 /*Или WAIT_TIMEOUT, если отвалились по таймеру*/)
                 cout << "Problem with SELECT WaitForSingleObject (return = " << waitError << "). Error: " << GetLastError() << endl;
+            #endif
 
 
 
@@ -142,8 +172,11 @@ CloseHandle
             }
 
 
-
+            #ifdef CRITICAL_AND_NOMUTEX
+            LeaveCriticalSection(&CriticalSELECT);
+            #else
             ReleaseMutex(hMutexSELECT);
+            #endif
             //=====critical SELECT block=====END
 
 
@@ -163,13 +196,21 @@ CloseHandle
             }
             
             //=====critical SUM block=====BEGIN
+            #ifdef CRITICAL_AND_NOMUTEX
+            EnterCriticalSection(&CriticalSUM);
+            #else
             waitError = WaitForSingleObject(hMutexSUM, INFINITE);
             if(waitError != WAIT_OBJECT_0 /*Или WAIT_TIMEOUT, если отвалились по таймеру*/)
                 cout << "Problem with SELECT WaitForSingleObject (return = " << waitError << "). Error: " << GetLastError() << endl;
+            #endif
             
             *((*par).globalSUM) += (*par).localSUM;
 
+            #ifdef CRITICAL_AND_NOMUTEX
+            LeaveCriticalSection(&CriticalSUM);
+            #else
             ReleaseMutex(hMutexSUM);
+            #endif
             //=====critical SUM block=====END
 
             
