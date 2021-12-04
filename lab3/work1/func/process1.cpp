@@ -160,7 +160,7 @@ LeaveCriticalSection(&CriticalSection);
             if(pi_blocks_i < pi_blocks_n)
             {
                 (*par).begin = pi_blocks_i * BS;
-                (*par).end = (pi_blocks_i+1) * BS;
+                (*par).end = (pi_blocks_i+1) * BS - 1;
                 if((*par).end > NN-1)
                     (*par).end = NN-1;
                 ++pi_blocks_i;
