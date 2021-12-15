@@ -52,11 +52,23 @@ void getDriveInfoUI(const char DriveLetter)
     char fileSystemNameBuffer[volumeNameSize];
     WINBOOL getInformationSuccess = GetVolumeInformationA(root, volumeNameBuffer, volumeNameSize, &volumeSerialNumber, &maximumComponentLength, &fileSystemFlags, fileSystemNameBuffer, fileSystemNameSize);
     if(!getInformationSuccess)
-        cout << "!!! Not all the requested information is retrieved. Here is what retrieved: " << endl;
+        cout << "!!! Not all the requested information is retrieved (error " << GetLastError() <<"). Here is what retrieved: " << endl;
+    
     cout << "The name of a the volume: " << volumeNameBuffer << endl;
+
+    /*Серийный номер тома, который присваивается операционной системой при форматировании*/
     cout << "The volume serial number: " << volumeSerialNumber << endl;
+
+    /*
+    максимальная длина в символах компонента имени файла (между "\"), поддержанного указанной файловой системой. 
+    Значение, сохраненное в переменной, указанной lpMaximumComponentLength используется, чтобы указать, 
+    что длинные имена поддерживаются указанной файловой системой. 
+    Например, для файловой системы FAT, поддерживающей длинные имена, функция сохраняет значение 255
+    */
     cout << "The maximum length of a file name component that a specified file system supports: " << maximumComponentLength << endl;
+    
     cout << "The name of the file system: " << fileSystemNameBuffer << endl;
+    
     printDecodeVolumeInfoFlags(fileSystemFlags);
 
     //=====Space=====
@@ -121,30 +133,94 @@ void printDecodeVolumeInfoFlags(DWORD flags)
 {
     cout << "Volume features: " << endl;
 
+    /*При записи на диск сохраняется регистр букв в имени файла*/
     if(flags & FILE_CASE_PRESERVED_NAMES)
         cout << "\t- The specified volume supports preserved case of file names when it places a name on disk. " << endl;
+    
+    /*Файловая система поддерживает поиск файлов с учетом регистра букв в именах*/
     if(flags & FILE_CASE_SENSITIVE_SEARCH)
         cout << "\t- The specified volume supports case-sensitive file names. " << endl;
+    
     #ifdef FILE_DAX_VOLUME
+    /*DAX = direct access volume.
+    Устройства энергонезависимой памяти рассматриваются как память с адресацией по байтам, 
+    что обеспечивает прямой доступ к памяти с адресацией по байтам*/
     if(flags & FILE_DAX_VOLUME) // Note  This flag was introduced in Windows 10, version 1607.
         cout << "\t- The specified volume is a direct access (DAX) volume. " << endl;
     #endif
+
+    /*FILE_VOLUME_IS_COMPRESSED и FILE_FILE_COMPRESSION взаимоисключающие.
+    Файловая система поддерживает сжатие файлов на уровне ФС*/
     if(flags & FILE_FILE_COMPRESSION)
         cout << "\t- The specified volume supports file-based compression. " << endl;
+    
+    /*
+    Альтернативные потоки данных (англ. Alternate Data Streams, ADS) — метаданные, связанные с объектом файловой системы NTFS.
+
+    В файловой системе NTFS файл, кроме основных данных, может также быть связан с одним или несколькими дополнительными потоками данных. 
+    При этом дополнительный поток может быть произвольного размера, в том числе может превышать размер основного файла.
+    NTFS может работать с несколькими **именованными потоками**, получившими название «Альтернативные потоки данных»
+
+    Поддержка ADS была реализована для совместимости с уже существующими операционными системами, 
+    позволяющими хранить метаданные для файлов (например, файловая система HFS). 
+    В операционной системе Windows 2000 альтернативные потоки данных используются для хранения таких атрибутов, 
+    как сведения об авторе, название и иконка файла. 
+
+    В операционной системе Windows Vista в команду DIR добавлен флаг «/R» для построения списка ADS
+
+    Отсутствие полноценной поддержки ADS со стороны операционной системы и приложений, 
+    а также других файловых систем может приводить к утере информации, хранящейся в альтернативных потоках 
+    (например, при копировании файла на том с FAT или при отправке его по электронной почте).
+    Windows "потеряет" эти потоки рекламы в ту же секунду, как переместится в любую файловую систему, отличную от NTFS.
+
+    Основной поток имеет имя "" (пустое имя). Чтобы записать в другой "поток":
+    > echo "It is stream1" > doc.txt:stream1 
+    Открыв doc.txt, ничего не поменяется, но "It is stream1" всё равно хранится в файле doc.txt
+    Прочитать из другого потока:
+    > more < doc.txt:stream1
+    
+    В PowerShell:
+    > Get-Item filename -Stream *
+    */
     if(flags & FILE_NAMED_STREAMS)
         cout << "\t- The specified volume supports named streams. " << endl;
+    
+    /*Том использует access control list (ACL)
+    ACL - это структура управления доступом. 
+    ACL определяет, кто или что может получать доступ к объекту (программе, процессу или файлу), 
+    и какие именно операции разрешено или запрещено выполнять субъекту (пользователю, группе пользователей).
+    */
     if(flags & FILE_PERSISTENT_ACLS)
         cout << "\t- The specified volume preserves and enforces access control lists (ACL). " << endl;
+    
+    /*READ ONLY VOLUME
+    Ничего не запишешь на раздел*/
     if(flags & FILE_READ_ONLY_VOLUME)
         cout << "\t- The specified volume is read-only. " << endl;
+    
+    /*!!!*/
     if(flags & FILE_SEQUENTIAL_WRITE_ONCE)
         cout << "\t- The specified volume supports a single sequential write. " << endl;
+    
+    /*Файловая система поддерживает Encrypted File System (EFS) */
     if(flags & FILE_SUPPORTS_ENCRYPTION)
         cout << "\t- The specified volume supports the Encrypted File System (EFS). " << endl;
     if(flags & FILE_SUPPORTS_EXTENDED_ATTRIBUTES)
         cout << "\t- The specified volume supports extended attributes. " << endl;
+    
+    /*Файловая система поддерживает hard link
+    Не soft link, а именно hard (https://pingvinus.ru/note/ln)*/
     if(flags & FILE_SUPPORTS_HARD_LINKS)
         cout << "\t- The specified volume supports hard links. " << endl;
+
+    /*
+    Файловая система поддерживает индификаторы объектов
+    В NTFS версий 3.0+ существует дополнительный метод адресации файлов и каталогов 
+    (кроме стандартной адресации по именам каталогов/файлов или адресов записей MFT). 
+    Приложение или ОС может присвоить файлу уникальный 128-разрядный идентификатор объекта, 
+    который в дальнейшем используется для ссылок на объект 
+    даже в случае его переименования или перемещения на другой том.
+    */
     if(flags & FILE_SUPPORTS_OBJECT_IDS)
         cout << "\t- The specified volume supports object identifiers. " << endl;
     if(flags & FILE_SUPPORTS_OPEN_BY_FILE_ID)
@@ -157,8 +233,13 @@ void printDecodeVolumeInfoFlags(DWORD flags)
         cout << "\t- The specified volume supports update sequence number (USN) journals. " << endl;
     if(flags & FILE_UNICODE_ON_DISK)
         cout << "\t- The specified volume supports Unicode in file names as they appear on disk. " << endl;
+    
+    /*FILE_VOLUME_IS_COMPRESSED и FILE_FILE_COMPRESSION взаимоисключающие.
+    Этот том был подвергнут сжатию.
+    Например, с помощью утилиты DriveSpace (DoubleSpace)*/
     if(flags & FILE_VOLUME_IS_COMPRESSED)
         cout << "\t- The specified volume is a compressed volume. " << endl;
+
     if(flags & FILE_VOLUME_QUOTAS)
         cout << "\t- The specified volume supports disk quotas. " << endl;
     #ifdef FILE_SUPPORTS_BLOCK_REFCOUNTING
