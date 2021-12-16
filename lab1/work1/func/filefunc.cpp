@@ -13,7 +13,7 @@ void createDirUI(string path)
     else if(succeedCreate == ERROR_PATH_NOT_FOUND)
         cout << "One or more intermediate directories do not exist. " << endl;
     else if(succeedCreate == 0)
-        cout << "Creation fails. " << endl;
+        cout << "Creation fails. (error " << GetLastError() << "). " << endl;
     else
         cout << "Directory \"" << path << "\" was created successfully. " << endl;
 }
@@ -24,7 +24,7 @@ void removeDirUI(string path)
     if(succeedRemove)
         cout << "The directory \"" << path << "\" was marked for deletion on close. The directory is not removed until the last handle to the directory is closed. " << endl;
     else
-        cout << "The problem is during the deletion of the folder. Perhaps the directory is not empty? " << endl;
+        cout << "The problem is during the deletion of the folder. Perhaps the directory is not empty? (error " << GetLastError() << "). " << endl;
 }
 
 void createFileUI(string path)
@@ -40,7 +40,7 @@ void createFileUI(string path)
     DWORD flagsAndAttributes = FILE_ATTRIBUTE_NORMAL;
     HANDLE handle = CreateFileA(path.c_str(), desiredAccess, shareMode, &securityAttributes, creationDisposition, flagsAndAttributes, NULL);
     if(handle == INVALID_HANDLE_VALUE)
-        cout << "Error during file creation. " << endl;
+        cout << "Error during file creation. (error " << GetLastError() << "). " << endl;
     else
     {
         cout << "File was created. Its hundle is " << handle << ". " << endl;
@@ -48,7 +48,7 @@ void createFileUI(string path)
         if(closeSuccess)
             cout << "File \"" << path << "\" closed successfully. " << endl;
         else
-            cout << "Problem with closing file. " << endl;
+            cout << "Problem with closing file (error " << GetLastError() << "). " << endl;
     }
 }
 
@@ -60,7 +60,7 @@ void moveFileUI(string oldFile, string newFile)
     if(moveSuccess)
         cout << "File \"" << oldFile << "\" was successfully moved to \"" << newFile << "\". " << endl;
     else
-        cout << "An error occurred during moving. " << endl;
+        cout << "An error occurred during moving (error " << GetLastError() << "). " << endl;
 }
 
 void copyFileUI(string oldFile, string newFile)
@@ -71,7 +71,7 @@ void copyFileUI(string oldFile, string newFile)
     if(copySuccess)
         cout << "File \"" << oldFile << "\" was successfully copied to \"" << newFile << "\". " << endl;
     else
-        cout << "An error occurred during copying. " << endl;
+        cout << "An error occurred during copying (error" << GetLastError() << "). "<< endl;
 }
 
 void getFileAttributesUI(string path)
@@ -84,7 +84,7 @@ void getFileAttributesUI(string path)
         printFileAttributes(attr);
     }
     else
-    cout << "There was a problem with getting the attributes of file \"" << path << "\". " << endl;
+        cout << "There was a problem with getting the attributes of file \"" << path << "\" (error " << GetLastError() << "). " << endl;
 }
 
 void printFileAttributes(DWORD attr)
@@ -143,7 +143,7 @@ void getFileInformationUI(string path)
     //max length of path.c_str() must be = MAX_PATH
     HANDLE handle = CreateFileA(path.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
     if(handle == INVALID_HANDLE_VALUE)
-        cout << "Error during file opening (=creation). " << endl;
+        cout << "Error during file opening (=creation). Error " << GetLastError() << ". " << endl;
     else
     {
         cout << "File was opened. Its hundle is " << handle << ". " << endl;
