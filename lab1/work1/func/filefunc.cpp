@@ -169,13 +169,13 @@ void getFileInformationUI(string path)
             cout << "Unique identifier of the file on the volume " << info.dwVolumeSerialNumber << ": " << info.nFileIndexHigh << "H and " << info.nFileIndexLow << "L. " << endl;
         }
         else
-            cout << "There was a problem with getting the file information. " << endl;
+            cout << "There was a problem with getting the file information (error " << GetLastError() << "). " << endl;
 
         WINBOOL closeSuccess = CloseHandle(handle);
         if(closeSuccess)
             cout << endl << "File \"" << path << "\" closed successfully. " << endl;
         else
-            cout << "Problem with closing file. " << endl;
+            cout << "Problem with closing file (error " << GetLastError() << "). " << endl;
     }
     
 }
@@ -332,7 +332,7 @@ void setFileAttributesUI(string path)
     if(setSuccess)
         cout << "The attributes for the file \"" << path << "\" are set successfully. " << endl;
     else
-        cout << "There was a problem during the setting of attributes. " << endl;
+        cout << "There was a problem during the setting of attributes (error " << GetLastError() << "). " << endl;
 }
 
 void printAttributesInfo_help()
@@ -355,7 +355,7 @@ FULL_TIME getFileTimeUI(string path)
     //max length of path.c_str() must be = MAX_PATH
     HANDLE handle = CreateFileA(path.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
     if(handle == INVALID_HANDLE_VALUE)
-        cout << "Error during file opening (=creation). " << endl;
+        cout << "Error during file opening (=creation). Error " << GetLastError() << "). " << endl;
     else
     {
         cout << "File \"" << path << "\" was opened. Its hundle is " << handle << ". " << endl;
@@ -376,13 +376,13 @@ FULL_TIME getFileTimeUI(string path)
             cout << "The file access time: " << encodeDate(lastAccessTime) << endl;
         }
         else
-            cout << "There was a problem with getting the file time information. " << endl;
+            cout << "There was a problem with getting the file time information (error " << GetLastError() << "). " << endl;
 
         WINBOOL closeSuccess = CloseHandle(handle);
         if(closeSuccess)
             cout << endl << "File \"" << path << "\" closed successfully. " << endl;
         else
-            cout << "Problem with closing file. " << endl;
+            cout << "Problem with closing file (error" << GetLastError() << "). " << endl;
     }
     return res;
 }
@@ -392,7 +392,7 @@ void setFileTimeUI(string path, string path4timeCopy)
     //max length of path.c_str() must be = MAX_PATH
     HANDLE handle = CreateFileA(path.c_str(), GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
     if(handle == INVALID_HANDLE_VALUE)
-        cout << "Error during file opening (=creation). " << endl;
+        cout << "Error during file opening (=creation). Error " << GetLastError() << "). " << endl;
     else
     {
         cout << "File \"" << path << "\" was opened. Its hundle is " << handle << ". " << endl;
@@ -408,12 +408,12 @@ void setFileTimeUI(string path, string path4timeCopy)
         if(setSuccess)
             cout << "The file time was changes successfully. " << endl;
         else
-            cout << "There was a problem with setting the file time information. " << endl;
+            cout << "There was a problem with setting the file time information (error " << GetLastError() << "). " << endl;
 
         WINBOOL closeSuccess = CloseHandle(handle);
         if(closeSuccess)
             cout << endl << "File \"" << path << "\" closed successfully. " << endl;
         else
-            cout << "Problem with closing file. " << endl;
+            cout << "Problem with closing file (error " << GetLastError() << "). " << endl;
     }
 }

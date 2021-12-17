@@ -10,7 +10,7 @@ void getDrivesUI()
 {
     DWORD drives = GetLogicalDrives();
 
-    for(int i = 0; i < n_drivesLetter; ++i)
+    for(unsigned i = 0; i < n_drivesLetter; ++i)
     {
         cout << "Drive " << drivesLetter[i] << " is ";
         if(drives & (1 << i))

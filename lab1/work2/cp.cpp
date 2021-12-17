@@ -56,7 +56,8 @@ void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_
     unsigned bsX[n_bsXY];
     unsigned bsY[n_bsXY];
     size_t i_bsXY = 0; /*WTF? warning: variable 'i_bsXY' set but not used*/ i_bsXY++;--i_bsXY; //blblblblbl
-    
+
+    /*Поток всегда 1, меняем blocksize*/
     thNum = 1;
     for(unsigned i = bs_b, i_bsXY = 0; i <= bs_e; ++i, ++i_bsXY)
     {
@@ -76,6 +77,7 @@ void cpUI(string path, string target, unsigned bs_b, unsigned bs_e, unsigned bs_
     unsigned thY[n_thXY];
     size_t i_thXY = 0; /*WTF? warning: variable 'i_bsXY' set but not used*/ i_thXY++;--i_thXY; //blblblblbl
 
+    /*фиксируем blocksize, меняем кол-во потоков*/
     bs = bs_std*clusterSize;
     for(unsigned i = thNum_b, i_thXY = 0; i <= thNum_e; ++i, ++i_thXY)
     {
@@ -131,7 +133,7 @@ DWORD cp(string path, string target, unsigned long long bs, unsigned long long t
             closeSuccess = 1;
         }
         else
-            cout << "Problem with closing file \"" << src << "\". " << endl;
+            cout << "Problem with closing file \"" << src << "\" (error " << GetLastError() << "). " << endl;
     }
     if( !(dest == NULL || dest == INVALID_HANDLE_VALUE) )
     {
@@ -144,7 +146,7 @@ DWORD cp(string path, string target, unsigned long long bs, unsigned long long t
             closeSuccess = 1;
         }
         else
-            cout << "Problem with closing file \"" << dest << "\". " << endl;
+            cout << "Problem with closing file \"" << dest << "\" (error " << GetLastError() << "). " << endl;
     }
     return resTime;
 }
@@ -281,7 +283,7 @@ DWORD getDriveSectorSize(DWORD &sectorsPerCluster)
     DWORD numberOfFreeClusters = -1;
     WINBOOL getSpaceSuccess = GetDiskFreeSpaceA(NULL, &sectorsPerCluster, &bytesPerSector, &numberOfFreeClusters, &totalNumberOfClusters);
     if(!getSpaceSuccess)
-        cout << "\t!!! An error occurred while getting information about the disk space !!!" << endl;
+        cout << "\t!!! An error occurred while getting information about the disk space !!! ERROR: " << GetLastError() << ". " << endl;
     return bytesPerSector;
 }
 
