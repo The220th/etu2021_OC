@@ -85,6 +85,7 @@ int main()
 
         prs_rw[li] = pi.hProcess;
         ths_rw[li] = pi.hThread;
+        Sleep(3);
     }
 
     for (size_t i = 0; i < N_W; ++i, ++li)
@@ -109,6 +110,7 @@ int main()
 
         prs_rw[li] = pi.hProcess;
         ths_rw[li] = pi.hThread;
+        Sleep(3);
     }
 
     WaitForMultipleObjects(N_R + N_W, prs_rw, TRUE, INFINITE);

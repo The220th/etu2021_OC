@@ -24,7 +24,7 @@ r_or_w:
 true = reader
 flase = writer
 */
-void Logger::log(int type, size_t id, size_t pageNum, bool r_or_w)
+void Logger::log(int type, size_t id, long long pageNum, bool r_or_w, int what = -1)
 {
     string reason;
     switch(type)
@@ -65,9 +65,11 @@ void Logger::log(int type, size_t id, size_t pageNum, bool r_or_w)
     #endif
     string time = std::to_string(milisecFromStart);
     
-    string page = std::to_string(pageNum);
+    string page = pageNum==-1 ? string("the first one released") : std::to_string(pageNum);
 
-    log(  rw + " " + ID + " " + reason + " page " + page + " (time = " + time + " ms). " );
+    string swhat = what==-1 ? "" : " byte " + std::to_string(what) + (r_or_w==true?" from":" to");
+
+    log(  rw + " " + ID + " " + reason + swhat + " page " + page + " (time = " + time + " ms). " );
 }
 
 void Logger::flush()

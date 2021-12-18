@@ -41,6 +41,6 @@ class Logger
     true = reader
     flase = writer
     */
-    void log(int type, size_t id, size_t page, bool r_or_w);
+    void log(int type, size_t id, long long pageNum, bool r_or_w, int what);
     void flush();
 };

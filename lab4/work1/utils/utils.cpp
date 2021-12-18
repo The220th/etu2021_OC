@@ -38,11 +38,11 @@ char* parse4Env(string s_id, string s_test)
 
     res[i++] = '\0';
 
-    for(i = 0; i < n; ++i)
+    /*for(i = 0; i < n; ++i)
         if(res[i] == '\0')
             cout << 0;
         else
-            cout << res[i];
+            cout << res[i];*/
 
     return res;
 }
