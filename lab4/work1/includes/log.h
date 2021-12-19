@@ -30,6 +30,20 @@ class Logger
     Logger(string fileName);
     ~Logger();
 
+    size_t getTime()
+    {
+        size_t milisecFromStart = 0;
+        #if IOcount == 1
+        time_t endTime;
+        time(&endTime);
+        milisecFromStart = (size_t)(difftime(endTime, startTime) * 1000 + 0.5);
+        #else
+        clock_t endTime = clock();
+        milisecFromStart = (size_t)(((double)(endTime - startTime) / CLOCKS_PER_SEC) * 1000 + 0.5);
+        #endif
+        return milisecFromStart;
+    }
+
     void log(string msg);
     /*
     type:

@@ -56,8 +56,6 @@ int main()
     }
 
     char* envs[N_R + N_W];
-    char* warningWTF = "gg=99"; // warning: passing NULL to non-pointer argument 6 of 'WINBOOL CreateProcessA
-    for(size_t i = 0; i < N_R + N_W; ++i) envs[i] = warningWTF;
     
     HANDLE prs_rw[N_R + N_W];
     HANDLE ths_rw[N_R + N_W];
@@ -73,7 +71,7 @@ int main()
         string s_id = "PR_ID=" + std::to_string(i);
         envs[li] = parse4Env(s_id, "test123=123");
 
-        WINBOOL resCreate = CreateProcessA("writer.exe", NULL, NULL, NULL, FALSE, NULL, envs[li], NULL, &si, &pi);
+        WINBOOL resCreate = CreateProcessA("writer.exe", NULL, NULL, NULL, FALSE, 0, envs[li], NULL, &si, &pi);
         if(resCreate)
             cout << "writer " << i << " started. " << endl;
         else
@@ -98,7 +96,7 @@ int main()
         string s_id = "PR_ID=" + std::to_string(i);
         envs[li] = parse4Env(s_id, "test123=123");
 
-        WINBOOL resCreate = CreateProcessA("reader.exe", NULL, NULL, NULL, FALSE, NULL, envs[li], NULL, &si, &pi);
+        WINBOOL resCreate = CreateProcessA("reader.exe", NULL, NULL, NULL, FALSE, 0, envs[li], NULL, &si, &pi);
         if(resCreate)
             cout << "reader " << i << " started. " << endl;
         else

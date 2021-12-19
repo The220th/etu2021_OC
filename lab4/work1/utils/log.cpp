@@ -54,15 +54,7 @@ void Logger::log(int type, size_t id, long long pageNum, bool r_or_w, int what =
     else
         rw = "writer";
 
-    size_t milisecFromStart = 0;
-    #if IOcount == 1
-    time_t endTime;
-    time(&endTime);
-    milisecFromStart = (size_t)(difftime(endTime, startTime) * 1000 + 0.5);
-    #else
-    clock_t endTime = clock();
-    milisecFromStart = (size_t)(((double)(endTime - startTime) / CLOCKS_PER_SEC) * 1000 + 0.5);
-    #endif
+    size_t milisecFromStart = getTime();
     string time = std::to_string(milisecFromStart);
     
     string page = pageNum==-1 ? string("the first one released") : std::to_string(pageNum);
