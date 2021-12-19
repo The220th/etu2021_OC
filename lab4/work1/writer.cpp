@@ -65,16 +65,16 @@ int main()
     //===============ENV_INIT===============
 
     //===============LOG_START===============
-    WaitForSingleObject(logMutex, INFINITE);
+    //WaitForSingleObject(logMutex, INFINITE);
     logger.log("writer " + string(buffC) + " started. "); // RW CHANGE = {reader, writer}
     //logger.flush();
-    ReleaseMutex(logMutex);
+    //ReleaseMutex(logMutex);
     //===============LOG_START===============
 
     size_t page_i;
     size_t pause;
 
-    for(size_t gi; gi < N_TIMES; ++gi)
+    for(size_t gi = 0; gi < N_TIMES; ++gi)
     {
         #if RND_CHOOSE == 1
         page_i = rand() % PAGE_NUM;
@@ -83,10 +83,10 @@ int main()
         #endif
 
         //===============LOG_BEGIN_WAIT===============
-        WaitForSingleObject(logMutex, INFINITE);
+        //WaitForSingleObject(logMutex, INFINITE);
         logger.log(1, prID, page_i, false, -1); // RW CHANGE = {true, false}
         //logger.flush();
-        ReleaseMutex(logMutex);
+        //ReleaseMutex(logMutex);
         //===============LOG_BEGIN_WAIT===============
 
         #if RND_CHOOSE == 1
@@ -101,20 +101,20 @@ int main()
                                                                    //unsigned mem_src = rand() % 256; *((unsigned*)(addr + PAGE_SIZE*page_i)) = mem_src; }
 
         //===============LOG_READING/WRITING===============
-        WaitForSingleObject(logMutex, INFINITE);
+        //WaitForSingleObject(logMutex, INFINITE);
         logger.log(2, prID, page_i, false, mem_src); // RW CHANGE = {true, false}
         //logger.flush();
-        ReleaseMutex(logMutex);
+        //ReleaseMutex(logMutex);
         //===============LOG_READING/WRITING===============
         pause = (rand() % 1001) + 500;
 
         Sleep((DWORD)pause);
 
         //===============LOG_RELEASING===============
-        WaitForSingleObject(logMutex, INFINITE);
+        //WaitForSingleObject(logMutex, INFINITE);
         logger.log(3, prID, page_i, false, -1); // RW CHANGE = {true, false}
         //logger.flush();
-        ReleaseMutex(logMutex);
+        //ReleaseMutex(logMutex);
         //===============LOG_RELEASING===============
 
         ReleaseMutex(io_mutexs[page_i]);

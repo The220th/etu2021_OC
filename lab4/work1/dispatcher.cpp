@@ -55,13 +55,48 @@ int main()
         }
     }
 
+    #ifdef MATLABCODE
+        HANDLE mathFile = CreateFileA(MAT_FILE_NAME.c_str(), GENERIC_WRITE | GENERIC_READ, 0, NULL, CREATE_ALWAYS, 0, NULL);
+        
+        if(mathFile == INVALID_HANDLE_VALUE)
+        {
+            cout << "Problem with mat create file: \"" << MAT_FILE_NAME << "\" (error " << GetLastError() << "). " << endl;
+            //too much close and free=/
+            return GetLastError();
+        }
+        cout << "* mat CreateFileA - OK" << endl;
+
+        SetFilePointer(mathFile, MAT_FILE_SIZE, 0, FILE_BEGIN);
+        SetEndOfFile(mathFile);
+
+        HANDLE mathMap = CreateFileMappingA(mathFile, NULL, PAGE_READWRITE, 0, 0, MAT_MAP_NAME.c_str()); // PAGE_READWRITE или FILE_MAP_ALL_ACCESS?
+        if(mathMap == NULL)
+        {
+            cout << "Problem in mat CreateFileMapping. Error: " << GetLastError() << endl;
+            //too much close and free=/
+            CloseHandle(mathFile);
+            return GetLastError();
+        }
+        cout << "* mat CreateFileMapping - OK" << endl;
+        
+        void* mataddr = MapViewOfFile(mathMap, FILE_MAP_READ, 0, 0, 0);
+        if(mataddr == NULL)
+        {
+            cout << "(dispatcher) Problem in mat MapViewOfFile. Error: " << GetLastError() << ". " << endl;
+            //too much close and free=/
+            return GetLastError();
+        }
+        cout << "* mat MapViewOfFile - OK" << endl;
+    #endif
+
     char* envs[N_R + N_W];
     
     HANDLE prs_rw[N_R + N_W];
     HANDLE ths_rw[N_R + N_W];
     size_t li = 0;
+    size_t MATSHIfT = 0;
 
-    for (size_t i = 0; i < N_R; ++i, ++li)
+    for (size_t i = 0; i < N_R; ++i, ++li, MATSHIfT+=(MAT_FILE_SIZE_BLOCK/sizeof(size_t)))
     {
         STARTUPINFOA si;
         ZeroMemory(&si, sizeof(STARTUPINFOA));
@@ -69,7 +104,8 @@ int main()
         PROCESS_INFORMATION pi;
 
         string s_id = "PR_ID=" + std::to_string(i);
-        envs[li] = parse4Env(s_id, "test123=123");
+        string smatshift = "matshift=" + std::to_string(MATSHIfT);
+        envs[li] = parse4Env(s_id, smatshift);
 
         WINBOOL resCreate = CreateProcessA("writer.exe", NULL, NULL, NULL, FALSE, 0, envs[li], NULL, &si, &pi);
         if(resCreate)
@@ -86,7 +122,7 @@ int main()
         Sleep(3);
     }
 
-    for (size_t i = 0; i < N_W; ++i, ++li)
+    for (size_t i = 0; i < N_W; ++i, ++li, MATSHIfT+=(MAT_FILE_SIZE_BLOCK/sizeof(size_t)))
     {
         STARTUPINFOA si;
         ZeroMemory(&si, sizeof(STARTUPINFOA));
@@ -94,7 +130,9 @@ int main()
         PROCESS_INFORMATION pi;
 
         string s_id = "PR_ID=" + std::to_string(i);
-        envs[li] = parse4Env(s_id, "test123=123");
+        string smatshift = "matshift=" + std::to_string(MATSHIfT);
+        envs[li] = parse4Env(s_id, smatshift);
+        cout << "datoll" << MATSHIfT << endl;
 
         WINBOOL resCreate = CreateProcessA("reader.exe", NULL, NULL, NULL, FALSE, 0, envs[li], NULL, &si, &pi);
         if(resCreate)
@@ -116,6 +154,8 @@ int main()
 
     cout << "All process finished. " << endl;
 
+    makeCodeForMatLab( (size_t*)(mataddr)+720/*((size_t*)mataddr)+((MAT_FILE_SIZE_BLOCK/sizeof(size_t))*(11))*/, (MAT_FILE_SIZE_BLOCK/sizeof(size_t)), N_R+N_W );
+
     //===============Cleaning===============
     for(size_t i = 0; i < N_R + N_W; ++i)
     {
@@ -127,7 +167,12 @@ int main()
     CloseHandle(logMutex);
     CloseHandle(hMap);
     CloseHandle(hFile);
-    //UnmapViewOfFile(*map);
+    #ifdef MATLABCODE
+        CloseHandle(mathFile);
+        CloseHandle(mathMap);
+        UnmapViewOfFile(mataddr);
+    #endif
+    //UnmapViewOfFile(map);
     //===============Cleaning===============
 
     cout << "=====done!=====" << endl;

@@ -10,6 +10,12 @@ RND_CHOOSE == 1, то выбор страницы будет рандомны
 */
 #define RND_CHOOSE 1
 
+/*
+Если MATLABCODE задефайнена, то будет высчитываться код для matlab, который строит график
+Если не нужно это, то просто закоментируйте define
+*/
+#define MATLABCODE
+
 const size_t PAGE_NUM = 20;
 const size_t N_R = 10;
 const size_t N_W = 10;
@@ -19,4 +25,12 @@ const string FILE_NAME("lab4_FILE");
 const string MAP_NAME("lab4_FILEMAPPING");
 const string LOG_MUTEX_NAME("lab4_LOG_MUTEX");
 const string IO_MUTEX_NAME("lab4_IO_MUTEX");
+
+#ifdef MATLABCODE
+const size_t MAT_FILE_SIZE_BLOCK = N_TIMES*3*2*sizeof(size_t);
+const size_t MAT_FILE_SIZE = (N_R+N_W)*MAT_FILE_SIZE_BLOCK;
+const string MAT_FILE_NAME("mat_lab4_FILE");
+const string MAT_MAP_NAME("mat_lab4_FILEMAPPING");
+#endif
+
 #endif
