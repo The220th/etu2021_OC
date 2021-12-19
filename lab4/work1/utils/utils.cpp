@@ -73,54 +73,43 @@ size_t ptr2size_t(LPVOID addrp)
 
 string makeCodeForMatLab(size_t *addr, size_t BS, size_t N_BS)
 {
-    string res = "\nCode for MatLab:\n\n";
+    ostringstream res;
+    res << "\nCode for MatLab:\n\n";
 /* Example:
+rectangle('Position', [1,1,2,10], 'FaceColor', [0.5, 0.5, 0.5], 'EdgeColor', [1, 0.2, 0.2], 'LineStyle', "--", 'LineWidth', 3);
 function res = showPlot()
 
-polX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
-polY = [1639, 882, 842, 850, 873, 843, 851, 859, 848, 801, 842, 843, 840, 846, 670, 846, 759, 756, 761, 425, 606, 262, 18, 104, 21, 26, 43, 95, 7, 12, 20, 18];
+%0.2 - 0.5 - 0.8
+cr = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 0.8];
 
-plot(polX, polY, 'r');
+cg = [0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2];
+
+cb = [0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5];
+
+hold on;
+y = 1;
+
+c = 3;
+rectangle('Position', [0,y,10,1], 'FaceColor', [cr(c), cg(c), cb(c)], 'EdgeColor', [1, 0.2, 0.2]);
+
+rectangle('Position', [10,y,567,1], 'FaceColor', [cr(c), cg(c), cb(c)], 'EdgeColor', [1, 0.2, 0.2], 'LineStyle', "-", 'LineWidth', 3);
+
+rectangle('Position', [577,y,5,1], 'LineStyle', "-", 'LineWidth', 1);
+
+c = 5;
+rectangle('Position', [582,y,11,1], 'FaceColor', [cr(c), cg(c), cb(c)], 'EdgeColor', [1, 0.2, 0.2]);
+
+rectangle('Position', [593,y,307,1], 'FaceColor', [cr(c), cg(c), cb(c)], 'EdgeColor', [1, 0.2, 0.2], 'LineStyle', "-", 'LineWidth', 3);
+
+%rectangle('Position', [900,y,5,10], 'LineStyle', "-", 'LineWidth', 1);
+
 grid on;
-xlim([1 32]);
-xticks(polX);
-yticks(0:100:max(polY)*1.5);
+%xlim([1 32]);
+%xticks(0:100:max([polY1, polY2, polY3])*1.5);
 
-[mini, nmin] = min(polY);
-x_min = polX(nmin)
-y_min = mini
-*/
-    /*
-    res += "function res = showPlot()\n\n";
-
-    res += "polX = [";
-    for(size_t i = 0; i < n; ++i)
-    {
-        res += std::to_string(X[i]);
-        if(i != n-1)
-             res += ", ";
-    }
-    res += "];\n";
-
-    res += "polY = [";
-    for(size_t i = 0; i < n; ++i)
-    {
-        res += std::to_string(Y[i]);
-        if(i != n-1)
-             res += ", ";
-    }
-    res += "];\n";
-
-    res += "\nplot(polX, polY, 'r');\n";
-    res += "grid on;\n";
-    res += "xlim(["; res += std::to_string(X[0]); res += " "; res += std::to_string(X[n-1]); res += "]);\n";
-    res += "xticks(polX);\n";
-    res += "yticks(0:100:max(polY)*1.5);\n";
-    res += "\n[mini, nmin] = min(polY);\n";
-    res += "x_min = polX(nmin)\n";
-    res += "y_min = mini\n";
+hold off;
     */
-    for(size_t gi = 0; gi < 1/*N_BS*/; ++gi)
+    /*for(size_t gi = 0; gi < N_BS; ++gi)
     {
         cout << "iter 1" << endl;
         for(size_t li = 0; li < BS;)
@@ -150,6 +139,60 @@ y_min = mini
             ++li; ++li;
         }
     }
-    cout << endl;
-    return res;
+    cout << endl;*/
+    res << "\n" << endl;
+    res << "function res = showPlot()\n" << endl;
+    res << "%0.2 - 0.5 - 0.8\n" << endl;
+    res << "cr = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 0.8];\n" << endl;
+    res << "cg = [0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2];\n" << endl;
+    res << "cb = [0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5];\n" << endl;
+    res << "hold on;\n" << endl;
+
+    //====================
+    size_t y = 1;
+    size_t maxi = 0;
+    for(size_t gi = 0; gi < N_BS; ++gi)
+    {
+        res << "y = " << y << ";\n" << endl;
+
+        size_t c;
+        size_t x;
+        size_t sh;
+        for(size_t li = 0; li < BS;)
+        {
+            x = *addr;
+            ++addr; ++li;
+            c = *addr;
+            ++addr; ++li;
+            sh = (*addr) - x;
+            res << "c = " << (c+1) << ";\n" << endl;
+            res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'FaceColor\', [cr(c), cg(c), cb(c)], \'EdgeColor\', [1, 0.2, 0.2]);\n" << endl;
+
+
+            x = *addr;
+            ++addr; ++li;
+            c = *addr;
+            ++addr; ++li;
+            sh = (*addr) - x;
+            res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'FaceColor\', [cr(c), cg(c), cb(c)], \'EdgeColor\', [1, 0.2, 0.2], \'LineStyle\', \"-\", \'LineWidth\', 3);\n" << endl;
+
+
+            x = *addr;
+            ++addr; ++li;
+            c = *addr;
+            ++addr; ++li;
+            sh = (*addr) - x;
+            if(li < BS)
+                res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'LineStyle\', \"-\", \'LineWidth\', 1);" << endl;
+            maxi = max(maxi, x+sh);
+        }
+        res << endl;
+        y+=2;
+    }
+    //====================
+
+    res << "grid on;\n" << endl;
+    res << "xticks(0:2000:" << maxi*1.2 << ");" << endl;
+    res << "hold off;\n" << endl;
+    return res.str();
 }

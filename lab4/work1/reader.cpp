@@ -84,13 +84,12 @@ int main()
     #ifdef MATLABCODE
         GetEnvironmentVariableA("matshift", buffC, nBuffC);
         size_t *mataddr = ((size_t*)mataddr_raw) + atoll(buffC);
-        cout << "atoll: " << atoll(buffC) << endl;
     #endif
     //===============ENV_INIT===============
 
     //===============LOG_START===============
     //WaitForSingleObject(logMutex, INFINITE);
-    logger.log("reader " + string(buffC) + " started. "); // RW CHANGE = {reader, writer}
+    logger.log("reader " + std::to_string(prID) + " started. "); // RW CHANGE = {reader, writer}
     //logger.flush();
     //ReleaseMutex(logMutex);
     //===============LOG_START===============
@@ -127,8 +126,8 @@ int main()
         //Если неудачно, то залозинить это и выйти... //too much close and free=/
         #endif
 
-        unsigned mem_src = *((unsigned*)(addr + PAGE_SIZE*page_i)); // RW CHANGE = {unsigned mem_src = *((unsigned*)(addr + PAGE_SIZE*page_i));, 
-                                                                   //unsigned mem_src = rand() % 256; *((unsigned*)(addr + PAGE_SIZE*page_i)) = mem_src; }
+        unsigned mem_src = *((unsigned*)((char*)addr + PAGE_SIZE*page_i)); /* RW CHANGE = {unsigned mem_src = *((unsigned*)((char*)addr + PAGE_SIZE*page_i));, 
+                                                                   unsigned mem_src = rand() % 256; *((unsigned*)((char*)addr + PAGE_SIZE*page_i)) = mem_src; }*/
 
         //===============LOG_READING/WRITING===============
         //WaitForSingleObject(logMutex, INFINITE);
@@ -165,7 +164,7 @@ int main()
     }
     //===============LOG_FINISHED===============
     WaitForSingleObject(logMutex, INFINITE);
-    logger.log("reader " + string(buffC) + " finished. "); // RW CHANGE = {reader, writer}
+    logger.log("reader " + std::to_string(prID) + " finished. "); // RW CHANGE = {reader, writer}
     logger.flush();
     ReleaseMutex(logMutex);
     //===============LOG_FINISHED===============

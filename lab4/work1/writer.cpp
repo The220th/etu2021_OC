@@ -57,16 +57,39 @@ int main()
         return GetLastError();
     }
 
+    #ifdef MATLABCODE
+        HANDLE mathMap = OpenFileMappingA(FILE_MAP_ALL_ACCESS, FALSE, MAT_MAP_NAME.c_str());
+        if(mathMap == NULL)
+        {
+            logger.log("(writer) Problem in mat OpenFileMappingA. Error: " + std::to_string(GetLastError())); // RW CHANGE = {reader, writer}
+            logger.flush();
+            return GetLastError();
+        }
+
+        void* mataddr_raw = MapViewOfFile(mathMap, FILE_MAP_WRITE, 0, 0, 0);
+        if(mataddr_raw == NULL)
+        {
+            logger.log("(writer) Problem in mat MapViewOfFile. Error: " + std::to_string(GetLastError())); // RW CHANGE = {reader, writer}
+            logger.flush();
+            //too much close and free=/
+            return GetLastError();
+        }
+    #endif
+
     //===============ENV_INIT===============
     //DWORD ProccessId = GetCurrentProcessId();
     GetEnvironmentVariableA("PR_ID", buffC, nBuffC);
     size_t prID = atoll(buffC);
     srand(time(NULL) + prID*13);
+    #ifdef MATLABCODE
+        GetEnvironmentVariableA("matshift", buffC, nBuffC);
+        size_t *mataddr = ((size_t*)mataddr_raw) + atoll(buffC);
+    #endif
     //===============ENV_INIT===============
 
     //===============LOG_START===============
     //WaitForSingleObject(logMutex, INFINITE);
-    logger.log("writer " + string(buffC) + " started. "); // RW CHANGE = {reader, writer}
+    logger.log("writer " + std::to_string(prID) + " started. "); // RW CHANGE = {reader, writer}
     //logger.flush();
     //ReleaseMutex(logMutex);
     //===============LOG_START===============
@@ -87,6 +110,12 @@ int main()
         logger.log(1, prID, page_i, false, -1); // RW CHANGE = {true, false}
         //logger.flush();
         //ReleaseMutex(logMutex);
+        #ifdef MATLABCODE
+            *mataddr = logger.getTime();
+            ++mataddr;
+            *mataddr = page_i;
+            ++mataddr;
+        #endif
         //===============LOG_BEGIN_WAIT===============
 
         #if RND_CHOOSE == 1
@@ -97,14 +126,20 @@ int main()
         //Если неудачно, то залозинить это и выйти... //too much close and free=/
         #endif
 
-        unsigned mem_src = rand() % 256; *((unsigned*)(addr + PAGE_SIZE*page_i)) = mem_src; // RW CHANGE = {unsigned mem_src = *((unsigned*)(addr + PAGE_SIZE*page_i));, 
-                                                                   //unsigned mem_src = rand() % 256; *((unsigned*)(addr + PAGE_SIZE*page_i)) = mem_src; }
+        unsigned mem_src = rand() % 256; *((unsigned*)((char*)addr + PAGE_SIZE*page_i)) = mem_src; /* RW CHANGE = {unsigned mem_src = *((unsigned*)((char*)addr + PAGE_SIZE*page_i));, 
+                                                                   unsigned mem_src = rand() % 256; *((unsigned*)((char*)addr + PAGE_SIZE*page_i)) = mem_src; }*/
 
         //===============LOG_READING/WRITING===============
         //WaitForSingleObject(logMutex, INFINITE);
         logger.log(2, prID, page_i, false, mem_src); // RW CHANGE = {true, false}
         //logger.flush();
         //ReleaseMutex(logMutex);
+        #ifdef MATLABCODE
+            *mataddr = logger.getTime();
+            ++mataddr;
+            *mataddr = page_i;
+            ++mataddr;
+        #endif
         //===============LOG_READING/WRITING===============
         pause = (rand() % 1001) + 500;
 
@@ -115,6 +150,12 @@ int main()
         logger.log(3, prID, page_i, false, -1); // RW CHANGE = {true, false}
         //logger.flush();
         //ReleaseMutex(logMutex);
+        #ifdef MATLABCODE
+            *mataddr = logger.getTime();
+            ++mataddr;
+            *mataddr = page_i;
+            ++mataddr;
+        #endif
         //===============LOG_RELEASING===============
 
         ReleaseMutex(io_mutexs[page_i]);
@@ -123,7 +164,7 @@ int main()
     }
     //===============LOG_FINISHED===============
     WaitForSingleObject(logMutex, INFINITE);
-    logger.log("writer " + string(buffC) + " finished. "); // RW CHANGE = {reader, writer}
+    logger.log("writer " + std::to_string(prID) + " finished. "); // RW CHANGE = {reader, writer}
     logger.flush();
     ReleaseMutex(logMutex);
     //===============LOG_FINISHED===============
@@ -135,6 +176,11 @@ int main()
 
     CloseHandle(hMap);
     UnmapViewOfFile(addr);
+
+    #ifdef MATLABCODE
+        CloseHandle(mathMap);
+        UnmapViewOfFile(mataddr);
+    #endif
     //===============Cleaning===============
 
     return 0;

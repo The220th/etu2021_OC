@@ -132,7 +132,6 @@ int main()
         string s_id = "PR_ID=" + std::to_string(i);
         string smatshift = "matshift=" + std::to_string(MATSHIfT);
         envs[li] = parse4Env(s_id, smatshift);
-        cout << "datoll" << MATSHIfT << endl;
 
         WINBOOL resCreate = CreateProcessA("reader.exe", NULL, NULL, NULL, FALSE, 0, envs[li], NULL, &si, &pi);
         if(resCreate)
@@ -154,7 +153,7 @@ int main()
 
     cout << "All process finished. " << endl;
 
-    makeCodeForMatLab( (size_t*)(mataddr)+720/*((size_t*)mataddr)+((MAT_FILE_SIZE_BLOCK/sizeof(size_t))*(11))*/, (MAT_FILE_SIZE_BLOCK/sizeof(size_t)), N_R+N_W );
+    cout << makeCodeForMatLab( (size_t*)(mataddr), (MAT_FILE_SIZE_BLOCK/sizeof(size_t)), N_R+N_W ) << endl;
 
     //===============Cleaning===============
     for(size_t i = 0; i < N_R + N_W; ++i)
