@@ -31,7 +31,7 @@ int main()
     {
         logger.log("(writer) Problem with openning logMutex. Error: " + std::to_string(GetLastError())); // RW CHANGE = {reader, writer}
         logger.flush();
-        //too mach close and free=/
+        //too much close and free=/
         return GetLastError();
     }
     HANDLE io_mutexs[PAGE_NUM];
@@ -44,7 +44,7 @@ int main()
         {
             logger.log("(writer) Problem with openning io_mutexs " + std::to_string(i) +  ". Error: " + std::to_string(GetLastError())); // RW CHANGE = {reader, writer}
             logger.flush();
-            //too mach close and free=/
+            //too much close and free=/
             return GetLastError();
         }
     }
@@ -53,7 +53,7 @@ int main()
     {
         logger.log("(writer) Problem in MapViewOfFile. Error: " + std::to_string(GetLastError())); // RW CHANGE = {reader, writer}
         logger.flush();
-        //too mach close and free=/
+        //too much close and free=/
         return GetLastError();
     }
 
@@ -91,10 +91,10 @@ int main()
 
         #if RND_CHOOSE == 1
         WaitForSingleObject(io_mutexs[page_i], INFINITE);
-        //Если неудачно, то залозинить это и выйти... //too mach close and free=/
+        //Если неудачно, то залозинить это и выйти... //too much close and free=/
         #else
         page_i = WaitForMultipleObjects(PAGE_NUM, io_mutexs, FALSE, INFINITE);
-        //Если неудачно, то залозинить это и выйти... //too mach close and free=/
+        //Если неудачно, то залозинить это и выйти... //too much close and free=/
         #endif
 
         unsigned mem_src = rand() % 256; *((unsigned*)(addr + PAGE_SIZE*page_i)) = mem_src; // RW CHANGE = {unsigned mem_src = *((unsigned*)(addr + PAGE_SIZE*page_i));, 

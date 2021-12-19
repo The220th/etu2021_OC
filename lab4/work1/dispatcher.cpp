@@ -39,7 +39,7 @@ int main()
     if(logMutex == NULL)
     {
         cout << "Problem with creating logMutex. Error: " << GetLastError() << endl;
-        //too mach close and free=/
+        //too much close and free=/
         return GetLastError();
     }
     HANDLE io_mutexs[PAGE_NUM];
@@ -50,7 +50,7 @@ int main()
         if(io_mutexs[i] == NULL)
         {
             cout << "Problem with creating io_mutexs " << i << ". Error: " << GetLastError() << endl;
-            //too mach close and free=/
+            //too much close and free=/
             return GetLastError();
         }
     }
@@ -79,7 +79,7 @@ int main()
         else
         {
             cout << "Problem with creating writer " << i << " process (error " << GetLastError() << "). " << endl;
-            //too mach close and free=/
+            //too much close and free=/
             return GetLastError();
         }
 
@@ -104,7 +104,7 @@ int main()
         else
         {
             cout << "Problem with creating reader " << i << " process (error " << GetLastError() << "). " << endl;
-            //too mach close and free=/
+            //too much close and free=/
             return GetLastError();
         }
 
@@ -114,7 +114,7 @@ int main()
     }
 
     WaitForMultipleObjects(N_R + N_W, prs_rw, TRUE, INFINITE);
-    // if(неудачно), то сообщить и выйти... //too mach close and free=/
+    // if(неудачно), то сообщить и выйти... //too much close and free=/
 
     cout << "All process finished. " << endl;
 
