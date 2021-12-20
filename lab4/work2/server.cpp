@@ -36,7 +36,7 @@ int main()
                 getline(cin, buffS);
                 if(buffS.length()-1 > PIPE_SIZE)
                 {
-                    cout << "Message more than" << PIPE_SIZE << " bytes. Enter again... " << endl;
+                    cout << "Message more than " << PIPE_SIZE << " bytes. Enter again... " << endl;
                     continue;
                 }
                 else

@@ -20,19 +20,9 @@ int main()
     {
         cout << "Connected to the pipe. " << endl;
 
-        OVERLAPPED overs[TH_NUM];
-        char buff[TH_NUM][TH_BS];
+        OVERLAPPED over;
         size_t offset_i = 0;
-        for (size_t i = 0; i < TH_NUM; ++i)
-        {
-            ULL2DWORDS(offset_i, &overs[i].Offset, &overs[i].OffsetHigh);
-            offset_i += TH_BS;
-        }
-
-        /*OVERLAPPED overlapped;
-        overlapped.hEvent = CreateEvent(NULL, true, false, NULL);
-        overlapped.Offset = 0;
-        overlapped.OffsetHigh = 0;*/
+        ULL2DWORDS(offset_i, &over.Offset, &over.OffsetHigh);
 
         char buffer[PIPE_SIZE]; buffer[0] = '\0';
         while(strcmp(buffer, EXIT_STR) != 0)
@@ -40,33 +30,12 @@ int main()
             callback = 0;
 
             ZeroMemory(buffer, PIPE_SIZE);
-            for(size_t i = 0; i < TH_NUM; ++i)
-                ZeroMemory(buff[i], TH_BS);
 
-            for(size_t i = 0; i < TH_NUM; ++i)
-                ReadFileEx(hPipe, buff[i], TH_BS, &overs[i], FileIOCompletionRoutine);
-            //ReadFile(hPipe, buffer, PIPE_SIZE, NULL, &overlapped);
-            //WaitForSingleObject(overlapped.hEvent, INFINITE);
-            while (callback < TH_NUM)
-                SleepEx(-1, TRUE);
-            
-            size_t j = 0;
-            for(size_t i = 0, li = 0; i < TH_NUM; ++i)
-                for(li = 0; li < TH_BS && buff[i][li] != '\0'; ++li)
-                    buffer[j++] = buff[i][li];
-            buffer[j] = '\0';
+            ReadFileEx(hPipe, buffer, PIPE_SIZE, &over, FileIOCompletionRoutine);
+            SleepEx(-1, TRUE);
 
-            for(size_t i = 0; i < TH_NUM; ++i)
-            {
-                for(size_t li = 0; li < TH_BS; ++li)
-                    cout << buff[i][li];
-                cout << endl;
-            }
-
-            cout << buffer << endl;
+            cout << "Server says: \"" << buffer << "\". " <<  endl;
         }
-
-        //CloseHandle(overlapped.hEvent);
         CloseHandle(hPipe);
     }
     else
