@@ -19,25 +19,3 @@ void ULL2DWORDS(size_t value, DWORD* l, DWORD* h)
     *l = value;
     *h = value >> 32;
 }
-
-string ptr8size_t(size_t addr)
-{
-    ostringstream oss;
-    oss << (LPCVOID)addr << " (" << addr << ")";
-    return oss.str();
-}
-
-string ptr8size_t(LPCVOID addrp)
-{
-    return ptr8size_t((size_t)addrp);
-}
-
-void closeHundles(HANDLE *file, HANDLE *map)
-{
-    if(file != NULL && *file != NULL)
-        CloseHandle(*file);
-    if(file != NULL && *map != NULL)
-        UnmapViewOfFile(*map);
-    // HANDLE от CreateFileMapping закроется автоматически
-    // после закрытия hFile и "отвязки"
-}
