@@ -97,6 +97,7 @@ int main()
     size_t page_i;
     size_t pause;
 
+    VirtualLock(addr, PAGE_SIZE * PAGE_NUM);
     for(size_t gi = 0; gi < N_TIMES; ++gi)
     {
         #if RND_CHOOSE == 1
@@ -168,6 +169,8 @@ int main()
     logger.flush();
     ReleaseMutex(logMutex);
     //===============LOG_FINISHED===============
+
+    VirtualUnlock(addr, PAGE_SIZE * PAGE_NUM);
 
     //===============Cleaning===============
     for(size_t i = 0; i < PAGE_NUM; ++i)

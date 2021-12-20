@@ -3,6 +3,11 @@
 #include <malloc.h>
 #include <iostream>
 #include <sstream>
+#include <list>
+#include <utility>
+#include <vector>
+
+#include "../includes/const.h"
 
 using namespace std;
 
@@ -73,8 +78,9 @@ size_t ptr2size_t(LPVOID addrp)
 
 string makeCodeForMatLab(size_t *addr, size_t BS, size_t N_BS)
 {
+    list<pair<size_t, signed long long>> timeStamp;
     ostringstream res;
-    res << "\nCode for MatLab:\n\n";
+    res << "\nCode for MatLab 1:\n";
 /* Example:
 rectangle('Position', [1,1,2,10], 'FaceColor', [0.5, 0.5, 0.5], 'EdgeColor', [1, 0.2, 0.2], 'LineStyle', "--", 'LineWidth', 3);
 function res = showPlot()
@@ -143,9 +149,9 @@ hold off;
     res << "\n" << endl;
     res << "function res = showPlot()\n" << endl;
     res << "%0.2 - 0.5 - 0.8\n" << endl;
-    res << "cr = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 0.8];\n" << endl;
-    res << "cg = [0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2];\n" << endl;
-    res << "cb = [0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5];\n" << endl;
+    res << "cr = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.8, 0.8, 0];\n" << endl; // Это для PAGE_NUM = 20
+    res << "cg = [0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2, 0.2, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 0.2, 0.2, 0];\n" << endl; // 20 цветов для каждой страницы
+    res << "cb = [0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0.8, 0.2, 0.5, 0];\n" << endl; // и ещё 1 цвет для ожидания какой-нибудь страницы, когда RND_CHOOSE != 1
     res << "hold on;\n" << endl;
 
     //====================
@@ -163,17 +169,20 @@ hold off;
             x = *addr;
             ++addr; ++li;
             c = *addr;
+            c = c==((size_t)(-1))?PAGE_NUM:c;
             ++addr; ++li;
             sh = (*addr) - x;
             res << "c = " << (c+1) << ";\n" << endl;
             res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'FaceColor\', [cr(c), cg(c), cb(c)], \'EdgeColor\', [1, 0.2, 0.2]);\n" << endl;
 
-
+            
             x = *addr;
             ++addr; ++li;
             c = *addr;
             ++addr; ++li;
             sh = (*addr) - x;
+            timeStamp.push_back(make_pair(x, 1));
+            res << "c = " << (c+1) << ";\n" << endl;
             res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'FaceColor\', [cr(c), cg(c), cb(c)], \'EdgeColor\', [1, 0.2, 0.2], \'LineStyle\', \"-\", \'LineWidth\', 3);\n" << endl;
 
 
@@ -182,8 +191,12 @@ hold off;
             c = *addr;
             ++addr; ++li;
             sh = (*addr) - x;
+            timeStamp.push_back(make_pair(x, -1));
             if(li < BS)
+            {
+                res << "c = " << c+1 << ";\n" << endl;
                 res << "rectangle(\'Position\', [" << x << ",y," << sh << ",1], \'LineStyle\', \"-\", \'LineWidth\', 1);" << endl;
+            }
             maxi = max(maxi, x+sh);
         }
         res << endl;
@@ -194,5 +207,74 @@ hold off;
     res << "grid on;\n" << endl;
     res << "xticks(0:2000:" << maxi*1.2 << ");" << endl;
     res << "hold off;\n" << endl;
+
+    res << "\n\nCode for MatLab 2:\n" << endl;
+    res << "function res = showPlot()\n" << endl;
+
+    timeStamp.sort();
+
+    vector<size_t> X;
+
+    vector<signed long long> Y;
+    size_t j = 0;
+    for(pair<size_t, signed long long> el : timeStamp)
+    {
+        if(j == 0)
+        {
+            X.push_back(el.first);
+            Y.push_back(el.second);
+            ++j;
+        }
+        else
+        {
+            if(el.first == X[j-1])
+            {
+                --j;
+                if(el.second == 1)
+                    Y[j]++;
+                else
+                    Y[j]--;
+                ++j;
+            }
+            else
+            {
+                X.push_back(el.first);
+                long long buff = 0;
+                if(el.second == 1)
+                    buff = Y[j-1] + 1;
+                else
+                    buff = Y[j-1] - 1;
+                Y.push_back(buff);
+                ++j;
+            }
+        }
+    }
+
+    res << "polX = [";
+    for(size_t i = 0; i < X.size(); ++i)
+    {
+        res << X[i];
+        if(i != X.size()-1)
+             res << ", ";
+    }
+    res << "];\n";
+
+    res << "polY = [";
+    for(size_t i = 0; i < Y.size(); ++i)
+    {
+        res << Y[i];
+        if(i != Y.size()-1)
+             res << ", ";
+    }
+    res << "];\n";
+
+    res << "\nplot(polX, polY, 'r');\n";
+    res << "grid on;\n";
+    res << "xlim([" << X[0] << " " << X[X.size()-1] << "]);\n";
+    res << "xticks(0:2000:" << maxi*1.2 << ");" << endl;
+    res << "\n[mini, nmin] = min(polY);\n";
+    res << "x_min = polX(nmin)\n";
+    res << "y_min = mini\n" << endl;
+
     return res.str();
 }
