@@ -8,3 +8,5 @@
 ``` bash
 > make
 ```
+
+Если у вас нет `make`, то установите `MinGW`. Подробнее об этом можно прочитать [тут](https://github.com/The220th/SharedLib/tree/main/cpp/Windows/MinGW): https://github.com/The220th/SharedLib/tree/main/cpp/Windows/MinGW
